@@ -1,6 +1,6 @@
+import { Customer } from './entities/Customer'
 import { Address } from './entities/Address'
 import { Cellphone } from './entities/Cellphone'
-import { Customer } from './entities/Customer'
 import { Document } from './entities/Document'
 import { DocumentType } from './enums/DocumentType'
 
