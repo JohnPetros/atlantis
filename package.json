@@ -11,6 +11,7 @@
   "dependencies": {
     "console-table-printer": "^2.12.1",
     "inquirer": "^12.4.2",
+    "chalk": "5.3.0",
     "uuid": "11.0.3"
   },
   "devDependencies": {
