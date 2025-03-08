@@ -5,6 +5,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "composite": false,
     "declaration": true,
     "declarationMap": true,
@@ -20,7 +21,5 @@
     "strict": true,
     "baseUrl": "."
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
