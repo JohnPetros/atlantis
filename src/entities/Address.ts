@@ -7,7 +7,7 @@ type AddressProps = {
   city: string
   state: string
   country: string
-  postalCode: string
+  zipcode: string
 }
 
 export class Address extends Entity<AddressProps> implements Prototype {
@@ -15,24 +15,52 @@ export class Address extends Entity<AddressProps> implements Prototype {
     return this.props.street
   }
 
+  set street(street: string) {
+    this.props.street = street
+  }
+
   get neighborhood(): string {
     return this.props.neighborhood
+  }
+
+  set neighborhood(neighborhood: string) {
+    this.props.neighborhood = neighborhood
   }
 
   get city(): string {
     return this.props.city
   }
 
+  set city(city: string) {
+    this.props.city = city
+  }
+
   get state(): string {
     return this.props.state
   }
 
-  get postalCode(): string {
-    return this.props.postalCode
+  set state(state: string) {
+    this.props.state = state
+  }
+
+  get zipcode(): string {
+    return this.props.zipcode
+  }
+
+  set zipcode(zipcode: string) {
+    this.props.zipcode = zipcode
   }
 
   get country(): string {
     return this.props.country
+  }
+
+  set country(country: string) {
+    this.props.country = country
+  }
+
+  get formattedValue(): string {
+    return `${this.street}, ${this.neighborhood}, ${this.city}, ${this.state} - ${this.zipcode}. ${this.country.toUpperCase()}`
   }
 
   public clone(): Address {
