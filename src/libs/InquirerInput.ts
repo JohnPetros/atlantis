@@ -1,7 +1,7 @@
 import { input, select } from '@inquirer/prompts'
 import type { Input } from '@/interfaces/Input'
-import { Validator } from '../utils/Validator'
 import type { Output } from '../interfaces/Output'
+import { DateValidator } from '@/validators/DateValidator'
 
 export class InquirerInput implements Input {
   async text(message: string): Promise<string> {
@@ -13,10 +13,10 @@ export class InquirerInput implements Input {
   }
 
   async date(message: string, output: Output): Promise<Date> {
-    const validator = new Validator(output)
+    const validator = new DateValidator(output)
     while (true) {
       const value = await input({ message: `${message}, no padrão dd/mm/yyyy:` })
-      if (!validator.validateDate(value)) {
+      if (!validator.validate(value)) {
         continue
       }
       const parts = value.split('/')

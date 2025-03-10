@@ -1,9 +1,7 @@
 import { MainMenu } from '@/menus/MainMenu'
 import { Command } from './Command'
-import { HandleCustomerRegisteringCommand } from './HandleCustomerRegisteringCommand'
-import { HandleCustomerListingCommand } from './HandleCustomerListingCommand'
-import { HandleCustomerRemovingCommand } from './HandleCustomerRemovingCommand'
-import { HandleCustomerEditingCommand } from './HandleCustomerEditingCommand'
+import { ManageCustomersCommand } from './ManageCustomersCommand'
+import { ManageAccomodationsCommand } from './ManageAccomodationsCommand'
 
 export class RunAppCommand extends Command {
   constructor() {
@@ -13,6 +11,7 @@ export class RunAppCommand extends Command {
   }
 
   async execute(): Promise<void> {
+    this.output.clear()
     this.output.title(
       'Bem-vindo(a) ao melhor sistema de gestão de clubes, hotéis e resorts do mundo, o Atlantis :)',
     )
@@ -20,23 +19,16 @@ export class RunAppCommand extends Command {
     while (this.isExecuting) {
       const option = await this.menu.display()
       switch (option) {
-        case 'register-customer':
-          this.subcommand = new HandleCustomerRegisteringCommand()
+        case 'customers-management':
+          this.subcommand = new ManageCustomersCommand()
           break
-        case 'list-customers':
-          this.subcommand = new HandleCustomerListingCommand()
+        case 'accomodations-management':
+          this.subcommand = new ManageAccomodationsCommand()
           break
-        case 'edit-customer':
-          this.subcommand = new HandleCustomerEditingCommand()
-          break
-        case 'remove-customer':
-          this.subcommand = new HandleCustomerRemovingCommand()
-          break
-        case 'exit': {
+        case 'exit':
           this.isExecuting = false
           this.output.success('Até a próxima')
-          return
-        }
+          continue
         default:
           this.output.error('Comando não entendido :(')
           continue

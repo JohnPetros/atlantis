@@ -6,10 +6,8 @@ export class MainMenu implements Menu {
 
   async display() {
     return await this.input.select('Por favor selecione', [
-      ['Cadastrar clientes', 'register-customer'],
-      ['Listar clientes', 'list-customers'],
-      ['Editar cliente', 'edit-customer'],
-      ['Remover cliente', 'remove-customer'],
+      ['Gestão de clientes', 'customers-management'],
+      ['Gestão de acomodações', 'accomodations-management'],
       ['Sair', 'exit'],
     ])
   }

@@ -19,6 +19,7 @@ export class RegisterHolderCommand extends Command {
       documents: [],
       cellphones: [],
       dependents: [],
+      isHosted: false,
       registrationDate: new Date(),
     })
 
