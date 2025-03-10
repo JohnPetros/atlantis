@@ -17,10 +17,11 @@ export class ListCustomersCommand extends Command {
         Endereço: holder.address.formattedValue,
         Documentos: holder.documents
           .map((document) => document.formattedNumber)
-          .join('; '),
+          .join(';'),
         Telefones: holder.cellphones
           .map((cellphone) => cellphone.formattedValue)
-          .join('; '),
+          .join(';'),
+        'Possui hospedagem?': holder.isHosted ? 'Sim' : 'Não',
       })),
     )
   }
