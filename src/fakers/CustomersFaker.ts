@@ -34,6 +34,7 @@ export class CustomersFaker {
       documents: [fakeCpf],
       cellphones: fakeCellphones,
       dependents: [],
+      isHosted: false,
       ...props,
     })
   }
