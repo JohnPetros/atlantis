@@ -60,7 +60,7 @@ export class Address extends Entity<AddressProps> implements Prototype {
   }
 
   get formattedValue(): string {
-    return `${this.street}, ${this.neighborhood}, ${this.city}, ${this.state} - ${this.zipcode}. ${this.country.toUpperCase()}`
+    return `${this.street}, ${this.state} - ${this.zipcode}. ${this.country.toUpperCase()}`
   }
 
   public clone(): Address {

@@ -13,6 +13,7 @@ export type CustomerProps = {
   documents: Document[]
   address?: Address
   dependents: Customer[]
+  isHosted: boolean
 }
 
 export class Customer extends Entity<CustomerProps> {
@@ -63,6 +64,15 @@ export class Customer extends Entity<CustomerProps> {
 
   get documents(): Document[] {
     return this.props.documents
+  }
+
+  get isHosted(): boolean {
+    return this.props.isHosted
+  }
+
+  set isHosted(isHosted: boolean) {
+    this.props.isHosted = isHosted
+    this.props.dependents.forEach((dependent) => (dependent.isHosted = true))
   }
 
   get dependents(): Customer[] {
