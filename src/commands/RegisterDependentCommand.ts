@@ -28,6 +28,7 @@ export class RegisterHolderCommand extends Command {
       cellphones: holder.cellphones.map((cellphone) => cellphone.clone()),
       documents: [],
       dependents: [],
+      isHosted: holder.isHosted,
       registrationDate: new Date(),
     })
 
