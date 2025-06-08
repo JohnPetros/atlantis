@@ -5,12 +5,20 @@ import type { clientLoader } from '~/routes/customers'
 
 type Props = {
   customerId?: string
+  isDependent?: boolean
   onSubmit: (customer: CustomerDto) => Promise<void>
 }
 
-export const CustomerForm = ({ customerId, onSubmit }: Props) => {
+export const CustomerForm = ({ customerId, isDependent, onSubmit }: Props) => {
   const data = useLoaderData<typeof clientLoader>()
-  const customer = data.find((customer) => customer.id === customerId)
+  let customer: CustomerDto | undefined
+
+  if (isDependent) {
+    const dependents = data.flatMap((customer) => customer.dependents)
+    customer = dependents.find((dependent) => dependent.id === customerId)
+  } else {
+    customer = data.find((customer) => customer.id === customerId)
+  }
 
   return <CustomerFormView customer={customer} onSubmit={onSubmit} />
 }

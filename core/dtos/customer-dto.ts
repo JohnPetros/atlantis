@@ -11,4 +11,5 @@ export type CustomerDto = {
   documents: DocumentDto[]
   cellphones: CellphoneDto[]
   address: AddressDto
+  dependents: CustomerDto[]
 }

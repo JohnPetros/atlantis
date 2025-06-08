@@ -197,6 +197,7 @@ export class Customer extends Entity<CustomerProps> {
       documents: this.documents.map((document) => document.dto),
       cellphones: this.cellphones.map((cellphone) => cellphone.dto),
       address: this.address.dto,
+      dependents: this.dependents.map((dependent) => dependent.dto),
     }
   }
 }

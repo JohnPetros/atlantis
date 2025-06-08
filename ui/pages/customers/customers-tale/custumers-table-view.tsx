@@ -20,7 +20,7 @@ import { DropdownMenu } from 'ui/components/dropdown-menu'
 import { FormDialog } from 'ui/components/form-dialog'
 import { CustomerForm } from './customer-form'
 import { AlertMessageDialog } from 'ui/components/alert-message-dialog'
-import { Input } from 'ui/components/input'
+import { DependentsDialog } from '../dependents-dialog'
 
 type CustomersTableData = {
   id: string
@@ -31,17 +31,20 @@ type CustomersTableData = {
   documents: string
   cellphones: string
   address: string
+  dependents: CustomerDto[]
 }
 
 type Props = {
-  data: CustomerDto[]
+  customers: CustomerDto[]
+  hasDependents?: boolean
   onDeleteCustomer: (customerId: string) => Promise<void>
   onCreateCustomer: (customer: CustomerDto) => Promise<void>
   onUpdateCustomer: (customer: CustomerDto) => Promise<void>
 }
 
 export const CustomersTableView = ({
-  data,
+  customers,
+  hasDependents = false,
   onDeleteCustomer,
   onCreateCustomer,
   onUpdateCustomer,
@@ -189,16 +192,17 @@ export const CustomersTableView = ({
               <DropdownMenu.Label>Ações</DropdownMenu.Label>
               <DropdownMenu.Item asChild>
                 <FormDialog
-                  title='Editar cliente'
+                  title={hasDependents ? 'Editar dependente' : 'Editar cliente'}
                   trigger={
-                    <Button type='button' variant='ghost'>
+                    <Button type='button' variant='ghost' className='justify-start'>
                       <PencilIcon className='h-3 w-3' />
-                      Editar cliente
+                      {hasDependents ? 'Editar dependente' : 'Editar cliente'}
                     </Button>
                   }
                 >
                   <CustomerForm
                     customerId={row.original.id}
+                    isDependent={hasDependents}
                     onSubmit={onUpdateCustomer}
                   />
                 </FormDialog>
@@ -207,15 +211,24 @@ export const CustomersTableView = ({
                 <AlertMessageDialog
                   onConfirm={() => onDeleteCustomer(row.original.id)}
                   trigger={
-                    <Button variant='ghost'>
+                    <Button variant='ghost' className='justify-start'>
                       <TrashIcon className='h-4 w-4' />
-                      Excluir cliente
+                      Excluir {hasDependents ? 'dependente' : 'cliente'}
                     </Button>
                   }
                 >
-                  Tem certeza que deseja excluir o cliente?
+                  Tem certeza que deseja excluir o{' '}
+                  {hasDependents ? 'dependente' : 'cliente'}?
                 </AlertMessageDialog>
               </DropdownMenu.Item>
+              {hasDependents && (
+                <DropdownMenu.Item asChild>
+                  <DependentsDialog
+                    customerId={row.original.id}
+                    dependents={row.original.dependents}
+                  />
+                </DropdownMenu.Item>
+              )}
             </DropdownMenu.Content>
           </DropdownMenu.Container>
         )
@@ -225,13 +238,13 @@ export const CustomersTableView = ({
 
   return (
     <DataTable
-      header={
+      newRowTrigger={
         <FormDialog
-          title='Cadastrar cliente'
+          title={hasDependents ? 'Cadastrar dependente' : 'Cadastrar cliente'}
           trigger={
             <Button variant='outline'>
               <PlusIcon className='h-4 w-4' />
-              Cadastrar cliente
+              {hasDependents ? 'Cadastrar dependente' : 'Cadastrar cliente'}
             </Button>
           }
         >
@@ -239,7 +252,7 @@ export const CustomersTableView = ({
         </FormDialog>
       }
       columns={columns}
-      data={data.map((customer) => ({
+      data={customers.map((customer) => ({
         id: customer.id,
         name: customer.name,
         socialName: customer.socialName,
@@ -252,6 +265,7 @@ export const CustomersTableView = ({
           .map((cellphone) => CellphoneFormatter.format(cellphone))
           .join(' | '),
         address: AddressFormatter.format(customer.address),
+        dependents: customer.dependents,
       }))}
     />
   )

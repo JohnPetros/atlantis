@@ -11,7 +11,7 @@ type Props<TData> = {
   table: ReactTable<TData>
   filterValue: string
   columnsCount: number
-  header: ReactNode
+  newRowTrigger: ReactNode
   onFilterChange: (value: string) => void
 }
 
@@ -19,7 +19,7 @@ export const DataTableView = <TData,>({
   table,
   columnsCount,
   filterValue,
-  header,
+  newRowTrigger,
   onFilterChange,
 }: Props<TData>) => {
   return (
@@ -31,7 +31,7 @@ export const DataTableView = <TData,>({
           onChange={(event) => onFilterChange(event.target.value)}
           className='max-w-sm'
         />
-        {header}
+        {newRowTrigger}
       </div>
       <Table.Root className='mt-3 '>
         <Table.Header>

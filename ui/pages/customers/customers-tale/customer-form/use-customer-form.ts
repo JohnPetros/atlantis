@@ -181,6 +181,7 @@ export const useCustomerForm = (
       cellphones: data.cellphones,
       documents,
       registrationDate: customer?.registrationDate ?? new Date().toISOString(),
+      dependents: [],
     }
 
     await onSubmit(customerDto)
@@ -197,12 +198,6 @@ export const useCustomerForm = (
 
     removeCellphone(index)
   }
-
-  useEffect(() => {
-    if (cellphonesFields.length === 0) {
-      appendCellphone({ ddd: '', number: '' })
-    }
-  }, [cellphonesFields.length, appendCellphone])
 
   return {
     form,

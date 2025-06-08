@@ -5,11 +5,11 @@ import { useDatatable } from './use-datable'
 
 type Props<TData> = {
   data: TData[]
-  header: ReactNode
+  newRowTrigger: ReactNode
   columns: ColumnDef<TData, any>[]
 }
 
-export const DataTable = <TData,>({ data, columns, header }: Props<TData>) => {
+export const DataTable = <TData,>({ data, columns, newRowTrigger }: Props<TData>) => {
   const { table, filterValue, handleFilterChange } = useDatatable(data, columns)
 
   return (
@@ -18,7 +18,7 @@ export const DataTable = <TData,>({ data, columns, header }: Props<TData>) => {
       columnsCount={columns.length}
       filterValue={filterValue}
       onFilterChange={handleFilterChange}
-      header={header}
+      newRowTrigger={newRowTrigger}
     />
   )
 }
