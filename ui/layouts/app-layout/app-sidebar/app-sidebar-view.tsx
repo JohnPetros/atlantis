@@ -1,4 +1,16 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react'
+import { ROUTES } from 'constants/routes'
+import {
+  BedDouble,
+  Building,
+  Calendar,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+  Users,
+  Waves,
+} from 'lucide-react'
+import { Link } from 'react-router'
 import { Sidebar } from 'ui/components/sidebar'
 
 const items = [
@@ -34,19 +46,44 @@ export const AppSidebarView = () => {
     <Sidebar.Container>
       <Sidebar.Content>
         <Sidebar.Group>
-          <Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
+          <Sidebar.GroupLabel className='flex items-center gap-1 text-2xl font-bold'>
+            <Waves className='size-24' />
+            Atlantis
+          </Sidebar.GroupLabel>
           <Sidebar.GroupContent>
-            <Sidebar.Menu>
-              {items.map((item) => (
-                <Sidebar.MenuItem key={item.title}>
-                  <Sidebar.MenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </Sidebar.MenuButton>
-                </Sidebar.MenuItem>
-              ))}
+            <Sidebar.Menu className='mt-6'>
+              <Sidebar.MenuItem>
+                <Sidebar.MenuButton asChild>
+                  <Link to={ROUTES.home}>
+                    <Home />
+                    <span>Home</span>
+                  </Link>
+                </Sidebar.MenuButton>
+              </Sidebar.MenuItem>
+              <Sidebar.MenuItem>
+                <Sidebar.MenuButton asChild>
+                  <Link to={ROUTES.customers}>
+                    <Users />
+                    <span>Clientes</span>
+                  </Link>
+                </Sidebar.MenuButton>
+              </Sidebar.MenuItem>
+              <Sidebar.MenuItem>
+                <Sidebar.MenuButton asChild>
+                  <Link to={ROUTES.accommodations}>
+                    <BedDouble />
+                    <span>Acomodações</span>
+                  </Link>
+                </Sidebar.MenuButton>
+              </Sidebar.MenuItem>
+              <Sidebar.MenuItem>
+                <Sidebar.MenuButton asChild>
+                  <Link to={ROUTES.hostings}>
+                    <Building />
+                    <span>Hospedagens</span>
+                  </Link>
+                </Sidebar.MenuButton>
+              </Sidebar.MenuItem>
             </Sidebar.Menu>
           </Sidebar.GroupContent>
         </Sidebar.Group>
