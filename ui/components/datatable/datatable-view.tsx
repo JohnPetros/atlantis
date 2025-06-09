@@ -63,7 +63,7 @@ export const DataTableView = <TData,>({
           ) : (
             <Table.Row>
               <Table.Cell colSpan={columnsCount} className='h-24 text-center'>
-                No results.
+                Nenhum resultado encontrado.
               </Table.Cell>
             </Table.Row>
           )}

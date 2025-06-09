@@ -1,15 +1,32 @@
 import { Entity } from './Entity'
-import type { Document } from './Document'
+import { Document } from './Document'
+import type { HostingDto } from 'core/dtos'
 
 type HostingProps = {
+  accomodationId: string
   accommodationName: string
   hostId: string
   hostName: string
   hostDocuments: Document[]
-  hostDependents: number
+  hostDependentsCount: number
 }
 
 export class Hosting extends Entity<HostingProps> {
+  static create(dto: HostingDto): Hosting {
+    return new Hosting({
+      accomodationId: dto.accomodationId,
+      accommodationName: dto.accomodationName,
+      hostId: dto.hostId,
+      hostName: dto.hostName,
+      hostDocuments: dto.hostDocuments.map(Document.create),
+      hostDependentsCount: dto.hostDependentsCount,
+    })
+  }
+
+  get accomodationId(): string {
+    return this.props.accomodationId
+  }
+
   get accomodationName(): string {
     return this.props.accommodationName
   }
@@ -26,7 +43,19 @@ export class Hosting extends Entity<HostingProps> {
     return this.props.hostDocuments
   }
 
-  get hostDependents(): number {
-    return this.props.hostDependents
+  get hostDependentsCount(): number {
+    return this.props.hostDependentsCount
+  }
+
+  get dto(): HostingDto {
+    return {
+      id: this.id,
+      accomodationId: this.accomodationId,
+      accomodationName: this.accomodationName,
+      hostId: this.hostId,
+      hostName: this.hostName,
+      hostDocuments: this.hostDocuments.map((document) => document.dto),
+      hostDependentsCount: this.hostDependentsCount,
+    }
   }
 }

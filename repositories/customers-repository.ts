@@ -33,7 +33,6 @@ export const CustomersRepository = () => {
 
     async updateDependent(customerId: string, dependent: CustomerDto) {
       const customer = await this.findById(customerId)
-      console.log('customer', customer)
       if (!customer) return
 
       customer.dependents = customer.dependents.filter((currentDependent) =>
