@@ -1,9 +1,8 @@
-import type { AccomodationName } from '@/enums/AccomodationName'
 import { Entity } from './Entity'
 import type { Document } from './Document'
 
 type HostingProps = {
-  accommodationName: AccomodationName
+  accommodationName: string
   hostId: string
   hostName: string
   hostDocuments: Document[]
@@ -11,7 +10,7 @@ type HostingProps = {
 }
 
 export class Hosting extends Entity<HostingProps> {
-  get accomodationName(): AccomodationName {
+  get accomodationName(): string {
     return this.props.accommodationName
   }
 

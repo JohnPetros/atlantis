@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactNode } from 'react'
 import { FormDialogView } from './form-dialog-view'
-import { useFormDialogView } from './use-form-dialog-view'
+import { useFormDialog } from './use-form-dialog'
 
 type Props = {
   title: string
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const FormDialog = (props: PropsWithChildren<Props>) => {
-  const { isOpen, handleOpenChange } = useFormDialogView()
+  const { isOpen, handleOpenChange } = useFormDialog()
   return (
     <FormDialogView
       {...props}

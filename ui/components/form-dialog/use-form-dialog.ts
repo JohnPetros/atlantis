@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useFormDialogView = () => {
+export const useFormDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   function handleOpenChange(open: boolean) {

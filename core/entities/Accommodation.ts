@@ -1,38 +1,63 @@
-// import type { AccomodationName } from 'core/enums/AccommodationName'
-// import type { Customer } from './Customer'
-// import { Entity } from './Entity'
+import type { AccommodationDto } from 'core/dtos'
+import { Entity } from './Entity'
 
-// type AccommodationProps = {
-//   accommodationName: AccomodationName
-//   singleBeds: number
-//   coupleBeds: number
-//   suites: number
-//   hasAirConditioning: boolean
-//   garages: number
-// }
+export type AccommodationProps = {
+  accommodationName: string
+  singleBeds: number
+  coupleBeds: number
+  suites: number
+  garages: number
+  hasAirConditioning: boolean
+}
 
-// export class Accommodation extends Entity<AccommodationProps> {
-//   get accomodationName(): AccomodationName {
-//     return this.props.accommodationName
-//   }
+export class Accommodation extends Entity<AccommodationProps> {
+  static create(dto: AccommodationDto) {
+    return new Accommodation(
+      {
+        accommodationName: dto.name,
+        singleBeds: dto.singleBeds,
+        coupleBeds: dto.coupleBeds,
+        suites: dto.suites,
+        garages: dto.garages,
+        hasAirConditioning: dto.hasAirConditioning,
+      },
+      dto.id,
+    )
+  }
 
-//   get singleBeds(): number {
-//     return this.props.singleBeds
-//   }
+  get accommodationName(): string {
+    return this.props.accommodationName
+  }
 
-//   get coupleBeds(): number {
-//     return this.props.coupleBeds
-//   }
+  get singleBeds(): number {
+    return this.props.singleBeds
+  }
 
-//   get suites(): number {
-//     return this.props.suites
-//   }
+  get coupleBeds(): number {
+    return this.props.coupleBeds
+  }
 
-//   get hasAirConditioning(): boolean {
-//     return this.props.hasAirConditioning
-//   }
+  get suites(): number {
+    return this.props.suites
+  }
 
-//   get garages(): number {
-//     return this.props.garages
-//   }
-// }
+  get hasAirConditioning(): boolean {
+    return this.props.hasAirConditioning
+  }
+
+  get garages(): number {
+    return this.props.garages
+  }
+
+  get dto(): AccommodationDto {
+    return {
+      id: this.id,
+      name: this.accommodationName,
+      singleBeds: this.singleBeds,
+      coupleBeds: this.coupleBeds,
+      suites: this.suites,
+      garages: this.garages,
+      hasAirConditioning: this.hasAirConditioning,
+    }
+  }
+}
