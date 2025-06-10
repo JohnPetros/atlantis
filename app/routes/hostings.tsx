@@ -19,13 +19,15 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const action = await request.json()
 
   if (action.name === 'create-hosting') {
-    const host = await customersRepository.findById(action.hostId)
-    const accommodation = await accommodationsRepository.findById(action.accomodationId)
+    const host = await customersRepository.findById(action.payload.hostId)
+    const accommodation = await accommodationsRepository.findById(
+      action.payload.accomodationId,
+    )
     if (host && accommodation) {
       const hosting = Hosting.create({
-        accomodationId: action.accomodationId,
+        accomodationId: action.payload.accomodationId,
         accomodationName: accommodation.name,
-        hostId: action.hostId,
+        hostId: action.payload.hostId,
         hostName: host.name,
         hostDocuments: host.documents.map((document) => document),
         hostDependentsCount: host.dependents.length,
@@ -35,13 +37,17 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   }
 
   if (action.name === 'update-hosting') {
-    const host = await customersRepository.findById(action.hostId)
-    const accommodation = await accommodationsRepository.findById(action.accomodationId)
+    const host = await customersRepository.findById(action.payload.hostId)
+    const accommodation = await accommodationsRepository.findById(
+      action.payload.accomodationId,
+    )
+    console.log(action.payload)
     if (host && accommodation) {
       const hosting = Hosting.create({
-        accomodationId: action.accomodationId,
+        id: action.payload.hostingId,
+        accomodationId: action.payload.accomodationId,
         accomodationName: accommodation.name,
-        hostId: action.hostId,
+        hostId: action.payload.hostId,
         hostName: host.name,
         hostDocuments: host.documents.map((document) => document),
         hostDependentsCount: host.dependents.length,

@@ -13,14 +13,17 @@ type HostingProps = {
 
 export class Hosting extends Entity<HostingProps> {
   static create(dto: HostingDto): Hosting {
-    return new Hosting({
-      accomodationId: dto.accomodationId,
-      accommodationName: dto.accomodationName,
-      hostId: dto.hostId,
-      hostName: dto.hostName,
-      hostDocuments: dto.hostDocuments.map(Document.create),
-      hostDependentsCount: dto.hostDependentsCount,
-    })
+    return new Hosting(
+      {
+        accomodationId: dto.accomodationId,
+        accommodationName: dto.accomodationName,
+        hostId: dto.hostId,
+        hostName: dto.hostName,
+        hostDocuments: dto.hostDocuments.map(Document.create),
+        hostDependentsCount: dto.hostDependentsCount,
+      },
+      dto.id,
+    )
   }
 
   get accomodationId(): string {

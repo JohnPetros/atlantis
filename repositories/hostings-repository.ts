@@ -20,6 +20,7 @@ export const HostingsRepository = () => {
       const index = hostings.findIndex(
         (currentHosting) => currentHosting.id === hosting.id,
       )
+      console.log(hostings)
       hostings[index] = hosting
     },
 

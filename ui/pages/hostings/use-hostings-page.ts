@@ -7,8 +7,12 @@ export function useHostingsPage() {
     await action.dispatch('create-hosting', { hostId, accomodationId })
   }
 
-  async function handleUpdateHosting(hostId: string, accomodationId: string) {
-    await action.dispatch('update-hosting', { hostId, accomodationId })
+  async function handleUpdateHosting(
+    hostId: string,
+    accomodationId: string,
+    hostingId?: string,
+  ) {
+    await action.dispatch('update-hosting', { hostId, accomodationId, hostingId })
   }
 
   async function handleDeleteHosting(hostingId: string) {

@@ -23,7 +23,7 @@ export const DataTableView = <TData,>({
   onFilterChange,
 }: Props<TData>) => {
   return (
-    <div className='rounded-md border p-6 max-w-[85vw] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent'>
+    <div className='rounded-md border p-6 w-sm sm:w-md md:w-3xl lg:w-[75vw] overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent'>
       <div className='flex items-center gap-3'>
         <Input
           placeholder='Pesquisar...'
@@ -33,7 +33,7 @@ export const DataTableView = <TData,>({
         />
         {newRowTrigger}
       </div>
-      <Table.Root className='mt-3 '>
+      <Table.Root className='mt-3 max-w'>
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
@@ -49,7 +49,7 @@ export const DataTableView = <TData,>({
             </Table.Row>
           ))}
         </Table.Header>
-        <Table.Body>
+        <Table.Body className='max-w-sm'>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <Table.Row key={row.id} data-state={row.getIsSelected() && 'selected'}>

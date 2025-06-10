@@ -22,22 +22,16 @@ export const HostingFormView = ({
   return (
     <Form.Container {...form}>
       <form onSubmit={handleSubmit} className='flex flex-col'>
-        <Form.Group>
+        <Form.Group className='grid-cols-1 md:grid-cols-3'>
           <Form.Field
             control={form.control}
-            name='hostId'
+            name='accomodationId'
             render={({ field }) => (
               <Form.Item>
                 <Form.Label>Acomodação</Form.Label>
                 <Form.Control>
-                  <Select.Container>
-                    <Select.Trigger
-                      className='w-[180px]'
-                      value={field.value}
-                      onChange={(event) => {
-                        field.onChange()
-                      }}
-                    >
+                  <Select.Container onValueChange={field.onChange} value={field.value}>
+                    <Select.Trigger className='w-full'>
                       <Select.Value placeholder='Acomodação' />
                     </Select.Trigger>
                     <Select.Content>
@@ -64,12 +58,8 @@ export const HostingFormView = ({
               <Form.Item>
                 <Form.Label>Cliente</Form.Label>
                 <Form.Control>
-                  <Select.Container>
-                    <Select.Trigger
-                      className='w-[180px]'
-                      value={field.value}
-                      onChange={field.onChange}
-                    >
+                  <Select.Container onValueChange={field.onChange} value={field.value}>
+                    <Select.Trigger className='w-full'>
                       <Select.Value placeholder='Cliente' />
                     </Select.Trigger>
                     <Select.Content>

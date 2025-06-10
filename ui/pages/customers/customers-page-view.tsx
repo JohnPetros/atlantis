@@ -12,7 +12,7 @@ export const CustomersPageView = () => {
   return (
     <div>
       <H1>Clientes</H1>
-      <div className='mt-4'>
+      <div className='mt-4 w-full'>
         <CustomersTable
           customers={customers}
           hasDependents

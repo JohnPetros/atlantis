@@ -16,7 +16,7 @@ export const AccommodationFormView = ({ accommodation, onSubmit }: Props) => {
   return (
     <Form.Container {...form}>
       <form onSubmit={handleSubmit} className='flex flex-col'>
-        <Form.Group>
+        <Form.Group className='grid-cols-1 md:grid-cols-3'>
           <Form.Field
             control={form.control}
             name='name'
@@ -60,7 +60,7 @@ export const AccommodationFormView = ({ accommodation, onSubmit }: Props) => {
           />
         </Form.Group>
 
-        <Form.Group>
+        <Form.Group className='grid-cols-1 md:grid-cols-3'>
           <Form.Field
             control={form.control}
             name='suites'

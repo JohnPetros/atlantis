@@ -5,43 +5,30 @@ import { z } from 'zod'
 
 import type { CustomerDto, DocumentDto } from 'core/dtos'
 import { DocumentType } from 'core/enums/DocumentType'
+import { useLoaderData } from 'react-router'
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: 'Nome é obrigatório.',
-  }),
-  socialName: z.string().min(1, {
-    message: 'Nome social é obrigatório.',
-  }),
-  birthDate: z.string().min(1, {
-    message: 'Data de nascimento é obrigatória.',
-  }),
+  name: z.string({ required_error: 'Nome é obrigatório.' }),
+  socialName: z.string({ required_error: 'Nome social é obrigatório.' }),
+  birthDate: z.string({ required_error: 'Data de nascimento é obrigatória.' }),
   address: z.object({
-    street: z.string().min(1, {
-      message: 'Rua é obrigatória.',
-    }),
-    neighborhood: z.string().min(1, {
-      message: 'Bairro é obrigatório.',
-    }),
-    city: z.string().min(1, {
-      message: 'Cidade é obrigatória.',
-    }),
-    state: z.string().min(1, {
-      message: 'Estado é obrigatório.',
-    }),
-    zipcode: z.string().min(1, {
-      message: 'CEP é obrigatório.',
-    }),
-    country: z.string().min(1, {
-      message: 'País é obrigatório.',
-    }),
+    street: z.string({ required_error: 'Rua é obrigatória.' }),
+    neighborhood: z.string({ required_error: 'Bairro é obrigatória.' }),
+    city: z.string({ required_error: 'Cidade é obrigatória.' }),
+    state: z.string({ required_error: 'Estado é obrigatória.' }),
+    zipcode: z.string({ required_error: 'CEP é obrigatório.' }),
+    country: z.string({ required_error: 'País é obrigatório.' }),
   }),
-  cellphones: z.array(
-    z.object({
-      number: z.string({ required_error: 'Número de celular é obrigatório.' }),
-      ddd: z.string({ required_error: 'DDD é obrigatório.' }),
+  cellphones: z
+    .array(
+      z.object({
+        number: z.string({ required_error: 'Número de celular é obrigatório.' }),
+        ddd: z.string({ required_error: 'DDD é obrigatório.' }),
+      }),
+    )
+    .min(1, {
+      message: 'Pelo menos um número de celular é obrigatório.',
     }),
-  ),
   cpfDocument: z.object({
     number: z
       .string({ required_error: 'CPF é obrigatório.' })
@@ -73,11 +60,11 @@ const formSchema = z.object({
     .object({
       number: z
         .string()
-        .min(9, {
-          message: 'Passaporte deve ter 9 dígitos.',
+        .min(8, {
+          message: 'Passaporte deve ter 8 dígitos.',
         })
-        .max(9, {
-          message: 'Passaporte deve ter 9 dígitos.',
+        .max(8, {
+          message: 'Passaporte deve ter 8 dígitos.',
         })
         .optional(),
       expeditionDate: z
@@ -91,6 +78,7 @@ type FormData = z.infer<typeof formSchema>
 
 export const useCustomerForm = (
   onSubmit: (customer: CustomerDto) => Promise<void>,
+  isDependent: boolean,
   customer?: CustomerDto,
 ) => {
   const cpfDocument = customer?.documents.find(
@@ -111,17 +99,19 @@ export const useCustomerForm = (
       socialName: customer?.socialName,
       birthDate: customer?.birthDate.split('T')[0],
       address: {
-        street: customer?.address.street,
-        neighborhood: customer?.address.neighborhood,
-        city: customer?.address.city,
-        state: customer?.address.state,
-        zipcode: customer?.address.zipcode,
-        country: customer?.address.country,
+        street: isDependent ? 'fake-address' : customer?.address.street,
+        neighborhood: isDependent ? 'fake-neighborhood' : customer?.address.neighborhood,
+        city: isDependent ? 'fake-city' : customer?.address.city,
+        state: isDependent ? 'fake-state' : customer?.address.state,
+        zipcode: isDependent ? 'fake-zipcode' : customer?.address.zipcode,
+        country: isDependent ? 'fake-country' : customer?.address.country,
       },
-      cellphones: customer?.cellphones.map((cellphone) => ({
-        number: cellphone.number,
-        ddd: cellphone.ddd,
-      })),
+      cellphones: isDependent
+        ? [{ ddd: '11', number: '999999999' }]
+        : customer?.cellphones.map((cellphone) => ({
+            number: cellphone.number,
+            ddd: cellphone.ddd,
+          })),
       cpfDocument: {
         number: cpfDocument?.number,
         expeditionDate: cpfDocument?.expeditionDate,
@@ -185,6 +175,8 @@ export const useCustomerForm = (
     }
 
     await onSubmit(customerDto)
+
+    window.dispatchEvent(new Event('form-submit'))
   }
 
   function handleAppendCellphone() {

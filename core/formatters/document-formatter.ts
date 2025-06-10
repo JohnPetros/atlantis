@@ -17,7 +17,7 @@ export class DocumentFormatter {
   }
 
   private static formatPassport(passaporte: string): string {
-    return `Passaporte: ${passaporte.slice(0, 3)}.${passaporte.slice(3, 6)}.${passaporte.slice(6, 9)}-${passaporte.slice(9)}`
+    return `Passaporte: ${passaporte}`
   }
 
   private static formatCpf(cpf: string): string {

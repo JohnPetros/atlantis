@@ -21,6 +21,7 @@ type HostingsTableData = {
   accommodationName: string
   hostName: string
   hostDocuments: string
+  hostDependentsCount: number
 }
 
 type Props = {
@@ -64,7 +65,7 @@ export const HostingsTableView = ({
             size='sm'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Camas de solteiro
+            Cliente
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         )
@@ -82,7 +83,7 @@ export const HostingsTableView = ({
             size='sm'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Documentos
+            Documentos do cliente
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         )
@@ -92,7 +93,7 @@ export const HostingsTableView = ({
       },
     },
     {
-      accessorKey: 'hostDocuments',
+      accessorKey: 'hostDependentsCount',
       header: ({ column }) => {
         return (
           <Button
@@ -100,13 +101,13 @@ export const HostingsTableView = ({
             size='sm'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Documentos
+            Qtd. de dependentes do cliente
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         )
       },
       cell: ({ row }) => {
-        return <div>{row.original.hostDocuments}</div>
+        return <div>{row.original.hostDependentsCount}</div>
       },
     },
     {
@@ -179,6 +180,7 @@ export const HostingsTableView = ({
         hostDocuments: hosting.hostDocuments
           .map((document) => DocumentFormatter.format(document.type, document.number))
           .join(' | '),
+        hostDependentsCount: hosting.hostDependentsCount,
       }))}
     />
   )

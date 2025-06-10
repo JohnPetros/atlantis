@@ -8,9 +8,9 @@ export const AppLayoutView = ({ children }: PropsWithChildren) => {
   return (
     <SidebarContextProvider>
       <AppSidebar />
-      <main className='px-6'>
+      <main className='px-6 pt-3'>
         <Sidebar.Trigger />
-        <div className='py-4'>{children}</div>
+        <div className='py-2'>{children}</div>
       </main>
     </SidebarContextProvider>
   )

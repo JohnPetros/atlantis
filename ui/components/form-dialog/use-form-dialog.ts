@@ -11,10 +11,10 @@ export const useFormDialog = () => {
     function handleFormSubmit() {
       setIsOpen(false)
     }
-    window.addEventListener('submit', handleFormSubmit)
+    window.addEventListener('form-submit', handleFormSubmit)
 
     return () => {
-      window.removeEventListener('submit', handleFormSubmit)
+      window.removeEventListener('form-submit', handleFormSubmit)
     }
   }, [])
 

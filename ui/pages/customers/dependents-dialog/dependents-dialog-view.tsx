@@ -31,7 +31,7 @@ export const DependentDialogView = ({
         </Dialog.Header>
         <CustomersTable
           customers={dependents}
-          hasDependents
+          hasDependents={false}
           onDeleteCustomer={onDeleteCustomer}
           onCreateCustomer={onCreateCustomer}
           onUpdateCustomer={onUpdateCustomer}

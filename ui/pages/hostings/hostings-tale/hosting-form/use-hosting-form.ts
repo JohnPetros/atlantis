@@ -5,18 +5,14 @@ import { z } from 'zod'
 import type { HostingDto } from 'core/dtos'
 
 const formSchema = z.object({
-  accomodationId: z.string().uuid({
-    message: 'Nome da acomodação é obrigatório.',
-  }),
-  hostId: z.string().uuid({
-    message: 'Host é obrigatório.',
-  }),
+  accomodationId: z.string({ required_error: 'Acomodação é obrigatório.' }),
+  hostId: z.string({ required_error: 'Cliente é obrigatório.' }),
 })
 
 type FormData = z.infer<typeof formSchema>
 
 export const useHostingForm = (
-  onSubmit: (hostId: string, accomodationId: string) => Promise<void>,
+  onSubmit: (hostId: string, accomodationId: string, hostingId?: string) => Promise<void>,
   hosting?: HostingDto,
 ) => {
   const form = useForm<FormData>({
@@ -29,10 +25,9 @@ export const useHostingForm = (
   })
 
   async function handleSubmit(data: FormData) {
-    await onSubmit(data.hostId, data.accomodationId)
+    await onSubmit(data.hostId, data.accomodationId, hosting?.id)
+    window.dispatchEvent(new Event('form-submit'))
   }
-
-  console.log(form.formState.errors)
 
   return {
     form,

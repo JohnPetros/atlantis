@@ -192,17 +192,17 @@ export const CustomersTableView = ({
               <DropdownMenu.Label>Ações</DropdownMenu.Label>
               <DropdownMenu.Item asChild>
                 <FormDialog
-                  title={hasDependents ? 'Editar dependente' : 'Editar cliente'}
+                  title={hasDependents ? 'Editar cliente' : 'Editar dependente'}
                   trigger={
                     <Button type='button' variant='ghost' className='justify-start'>
                       <PencilIcon className='h-3 w-3' />
-                      {hasDependents ? 'Editar dependente' : 'Editar cliente'}
+                      {hasDependents ? 'Editar cliente' : 'Editar dependente'}
                     </Button>
                   }
                 >
                   <CustomerForm
                     customerId={row.original.id}
-                    isDependent={hasDependents}
+                    isDependent={!hasDependents}
                     onSubmit={onUpdateCustomer}
                   />
                 </FormDialog>
@@ -213,12 +213,12 @@ export const CustomersTableView = ({
                   trigger={
                     <Button variant='ghost' className='justify-start'>
                       <TrashIcon className='h-4 w-4' />
-                      Excluir {hasDependents ? 'dependente' : 'cliente'}
+                      Excluir {hasDependents ? 'cliente' : 'dependente'}
                     </Button>
                   }
                 >
                   Tem certeza que deseja excluir o{' '}
-                  {hasDependents ? 'dependente' : 'cliente'}?
+                  {hasDependents ? 'cliente' : 'dependente'}?
                 </AlertMessageDialog>
               </DropdownMenu.Item>
               {hasDependents && (
@@ -240,15 +240,15 @@ export const CustomersTableView = ({
     <DataTable
       newRowTrigger={
         <FormDialog
-          title={hasDependents ? 'Cadastrar dependente' : 'Cadastrar cliente'}
+          title={hasDependents ? 'Cadastrar cliente' : 'Cadastrar dependente'}
           trigger={
             <Button variant='outline'>
               <PlusIcon className='h-4 w-4' />
-              {hasDependents ? 'Cadastrar dependente' : 'Cadastrar cliente'}
+              {hasDependents ? 'Cadastrar cliente' : 'Cadastrar dependente'}
             </Button>
           }
         >
-          <CustomerForm onSubmit={onCreateCustomer} />
+          <CustomerForm isDependent={!hasDependents} onSubmit={onCreateCustomer} />
         </FormDialog>
       }
       columns={columns}

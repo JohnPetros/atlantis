@@ -54,6 +54,7 @@ export const useAccommodationForm = (
     }
 
     await onSubmit(accommodationDto)
+    window.dispatchEvent(new Event('form-submit'))
   }
 
   return {

@@ -8,7 +8,6 @@ export const HostingsPageView = () => {
   const data = useLoaderData<typeof clientLoader>()
   const { handleDeleteHosting, handleCreateHosting, handleUpdateHosting } =
     useHostingsPage()
-  console.log(data)
 
   return (
     <div>

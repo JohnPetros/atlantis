@@ -14,7 +14,12 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   }
 
   if (action.name === 'create-dependent') {
-    const dependent = Customer.create(action.payload.dependent)
+    const customer = await customersRepository.findById(action.payload.customerId)
+    const dependent = Customer.create({
+      ...action.payload.dependent,
+      address: customer?.address,
+      cellphones: customer?.cellphones,
+    })
     await customersRepository.addDependent(action.payload.customerId, dependent.dto)
   }
 
@@ -24,7 +29,12 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   }
 
   if (action.name === 'update-dependent') {
-    const dependent = Customer.create(action.payload.dependent)
+    const customer = await customersRepository.findById(action.payload.customerId)
+    const dependent = Customer.create({
+      ...action.payload.dependent,
+      address: customer?.address,
+      cellphones: customer?.cellphones,
+    })
     await customersRepository.updateDependent(action.payload.customerId, dependent.dto)
   }
 

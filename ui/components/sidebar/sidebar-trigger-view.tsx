@@ -23,7 +23,7 @@ export const SidebarTriggerView = ({ className, onClick, ...props }: Props) => {
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <PanelLeftIcon size={40} />
       <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   )
