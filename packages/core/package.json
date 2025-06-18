@@ -1,0 +1,14 @@
+{
+  "name": "@atlantis/core",
+  "type": "module",
+  "exports": {
+    "./entities": "./src/entities/index.ts",
+    "./dtos": "./src/dtos/index.ts",
+    "./directors": "./src/directors/index.ts",
+    "./builders": "./src/builders/index.ts",
+    "./fakers": "./src/fakers/index.ts",
+    "./enums": "./src/enums/index.ts",
+    "./interfaces": "./src/interfaces/index.ts",
+    "./formatters": "./src/formatters/index.ts"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@atlantis/backend",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@atlantis/core": "*",
+    "@hono/node-server": "^1.14.4",
+    "@libsql/client": "^0.15.9",
+    "@prisma/adapter-libsql": "^6.10.0",
+    "@prisma/client": "^6.10.0",
+    "hono": "^4.7.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "prisma": "^6.10.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  }
+}

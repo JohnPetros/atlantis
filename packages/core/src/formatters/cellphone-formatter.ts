@@ -1,0 +1,7 @@
+import type { CellphoneDto } from '../dtos'
+
+export class CellphoneFormatter {
+  static format(cellphone: CellphoneDto): string {
+    return `(${cellphone.ddd}) ${cellphone.number}`
+  }
+}
