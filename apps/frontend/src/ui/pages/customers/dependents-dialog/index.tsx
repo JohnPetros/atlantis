@@ -1,4 +1,5 @@
-import type { CustomerDto } from 'core/dtos'
+import type { CustomerDto } from '@atlantis/core/dtos'
+
 import { DependentDialogView } from './dependents-dialog-view'
 import { useDependentsDialog } from './use-dependents-dialog'
 

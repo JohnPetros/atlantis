@@ -1,4 +1,4 @@
-import { useActionContext } from 'ui/hooks'
+import { useActionContext } from '@/ui/hooks'
 
 export function useHostingsPage() {
   const action = useActionContext()

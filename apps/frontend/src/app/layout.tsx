@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router'
-import { AppLayout } from 'ui/layouts/app-layout'
+import { AppLayout } from '@/ui/layouts/app-layout'
 
 const Layout = () => {
   return (

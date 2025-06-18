@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
-import { useSidebarContext } from 'ui/hooks'
-import { cn } from 'ui/utils'
+import { useSidebarContext } from '@/ui/hooks'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<'button'>
 

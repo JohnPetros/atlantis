@@ -1,5 +1,5 @@
-import { useSidebarContext } from 'ui/hooks'
-import { cn } from 'ui/utils'
+import { useSidebarContext } from '@/ui/hooks'
+import { cn } from '@/ui/utils'
 import { Sheet } from '../sheet'
 import type { CSSProperties } from 'react'
 

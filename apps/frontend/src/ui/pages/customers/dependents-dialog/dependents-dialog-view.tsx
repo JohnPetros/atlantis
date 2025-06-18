@@ -1,8 +1,10 @@
-import type { CustomerDto } from 'core/dtos'
-import { Button } from 'ui/components/button'
-import { Dialog } from 'ui/components/dialog'
-import { CustomersTable } from '../customers-tale'
 import { User } from 'lucide-react'
+
+import type { CustomerDto } from '@atlantis/core/dtos'
+
+import { Button } from '@/ui/components/button'
+import { Dialog } from '@/ui/components/dialog'
+import { CustomersTable } from '../customers-tale'
 
 type Props = {
   dependents: CustomerDto[]

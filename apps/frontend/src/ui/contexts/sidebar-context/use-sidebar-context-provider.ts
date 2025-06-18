@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { useIsMobile } from 'ui/hooks/use-mobile'
+import { useIsMobile } from '@/ui/hooks/use-mobile'
 import type { SidebarContextValue } from './sidebar-context-props'
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state'

@@ -1,8 +1,8 @@
 import type * as LabelPrimitive from '@radix-ui/react-label'
 import { Label } from '@radix-ui/react-label'
 
-import { useFormContext } from 'ui/hooks/use-form-context'
-import { cn } from 'ui/utils'
+import { useFormContext } from '@/ui/hooks/use-form-context'
+import { cn } from '@/ui/utils'
 
 type Props = React.ComponentProps<typeof LabelPrimitive.Root>
 

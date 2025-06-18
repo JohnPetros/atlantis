@@ -1,11 +1,9 @@
-import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import type { CustomerDto, DocumentDto } from 'core/dtos'
-import { DocumentType } from 'core/enums/DocumentType'
-import { useLoaderData } from 'react-router'
+import type { CustomerDto, DocumentDto } from '@atlantis/core/dtos'
+import { DocumentType } from '@atlantis/core/enums'
 
 const formSchema = z.object({
   name: z.string({ required_error: 'Nome é obrigatório.' }),
@@ -42,36 +40,53 @@ const formSchema = z.object({
   }),
   rgDocument: z
     .object({
-      number: z
-        .string()
-        .min(9, {
-          message: 'RG deve ter 9 dígitos.',
-        })
-        .max(9, {
-          message: 'RG deve ter 9 dígitos.',
-        })
-        .optional(),
-      expeditionDate: z
-        .string({ required_error: 'Data de expedição é obrigatória.' })
-        .optional(),
+      number: z.string().optional(),
+      expeditionDate: z.string().optional(),
     })
-    .optional(),
+    .optional()
+    .refine(
+      (data) => {
+        const hasNumber = data?.number?.trim()
+        const hasDate = data?.expeditionDate?.trim()
+
+        if (!hasNumber && !hasDate) return true
+
+        if (hasNumber && hasDate && hasNumber.length === 9) return true
+
+        return false
+      },
+      {
+        message:
+          'Se preencher o RG, ambos número (9 dígitos) e data de expedição são obrigatórios.',
+        path: ['number'],
+      },
+    ),
   passportDocument: z
     .object({
-      number: z
-        .string()
-        .min(8, {
-          message: 'Passaporte deve ter 8 dígitos.',
-        })
-        .max(8, {
-          message: 'Passaporte deve ter 8 dígitos.',
-        })
-        .optional(),
-      expeditionDate: z
-        .string({ required_error: 'Data de expedição é obrigatória.' })
-        .optional(),
+      number: z.string().optional(),
+      expeditionDate: z.string().optional(),
     })
-    .optional(),
+    .optional()
+    .refine(
+      (data) => {
+        const hasNumber = data?.number?.trim()
+        const hasDate = data?.expeditionDate?.trim()
+
+        // Se ambos estão vazios, é válido
+        if (!hasNumber && !hasDate) return true
+
+        // Se ambos estão preenchidos e o número tem 8 dígitos, é válido
+        if (hasNumber && hasDate && hasNumber.length === 8) return true
+
+        // Qualquer outra situação é inválida
+        return false
+      },
+      {
+        message:
+          'Se preencher o passaporte, ambos número (8 dígitos) e data de expedição são obrigatórios.',
+        path: ['number'],
+      },
+    ),
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -114,15 +129,15 @@ export const useCustomerForm = (
           })),
       cpfDocument: {
         number: cpfDocument?.number,
-        expeditionDate: cpfDocument?.expeditionDate,
+        expeditionDate: cpfDocument?.expeditionDate.split('T')[0],
       },
       rgDocument: {
         number: rgDocument?.number,
-        expeditionDate: rgDocument?.expeditionDate,
+        expeditionDate: rgDocument?.expeditionDate.split('T')[0],
       },
       passportDocument: {
         number: passportDocument?.number,
-        expeditionDate: passportDocument?.expeditionDate,
+        expeditionDate: passportDocument?.expeditionDate.split('T')[0],
       },
     },
   })
@@ -146,7 +161,7 @@ export const useCustomerForm = (
       })
     }
 
-    if (data.rgDocument?.number && data.rgDocument.expeditionDate) {
+    if (data.rgDocument?.number?.trim() && data.rgDocument.expeditionDate?.trim()) {
       documents.push({
         type: DocumentType.RG,
         number: data.rgDocument.number,
@@ -154,7 +169,10 @@ export const useCustomerForm = (
       })
     }
 
-    if (data.passportDocument?.number && data.passportDocument.expeditionDate) {
+    if (
+      data.passportDocument?.number?.trim() &&
+      data.passportDocument.expeditionDate?.trim()
+    ) {
       documents.push({
         type: DocumentType.PASSAPORTE,
         number: data.passportDocument.number,

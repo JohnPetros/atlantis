@@ -16,7 +16,11 @@ export class AccommodationsRepository {
   }
 
   async findAll(): Promise<AccommodationDto[]> {
-    const accommodations = await prisma.accommodation.findMany()
+    const accommodations = await prisma.accommodation.findMany({
+      orderBy: {
+        createdAt: 'asc',
+      },
+    })
     return accommodations.map(this.mapToDto)
   }
 
@@ -34,7 +38,7 @@ export class AccommodationsRepository {
     await prisma.accommodation.create({
       data: {
         id: accommodation.id,
-        accommodationName: accommodation.accommodationName,
+        name: accommodation.name,
         singleBeds: accommodation.singleBeds,
         coupleBeds: accommodation.coupleBeds,
         suites: accommodation.suites,
@@ -50,7 +54,7 @@ export class AccommodationsRepository {
     await prisma.accommodation.update({
       where: { id: accommodation.id },
       data: {
-        accommodationName: accommodation.accommodationName,
+        name: accommodation.name,
         singleBeds: accommodation.singleBeds,
         coupleBeds: accommodation.coupleBeds,
         suites: accommodation.suites,

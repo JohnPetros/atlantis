@@ -2,7 +2,7 @@ import { useEffect, useRef, type ComponentProps } from 'react'
 import { type DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 import { Button, buttonVariants } from '../button'
 
 type Props = ComponentProps<typeof DayPicker> & {

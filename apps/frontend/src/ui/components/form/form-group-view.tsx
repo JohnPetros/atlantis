@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = PropsWithChildren<{
   className?: string

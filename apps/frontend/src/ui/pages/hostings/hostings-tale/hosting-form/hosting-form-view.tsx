@@ -1,7 +1,7 @@
 import type { AccommodationDto, CustomerDto, HostingDto } from 'core/dtos'
-import { Form } from 'ui/components/form'
-import { Button } from 'ui/components/button'
-import { Select } from 'ui/components/select'
+import { Form } from '@/ui/components/form'
+import { Button } from '@/ui/components/button'
+import { Select } from '@/ui/components/select'
 import { useHostingForm } from './use-hosting-form'
 
 type Props = {

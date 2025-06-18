@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import { Separator } from '../separator'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof Separator>
 

@@ -1,5 +1,6 @@
-import type { CustomerDto } from 'core/dtos'
-import { useActionContext } from 'ui/hooks'
+import type { CustomerDto } from '@atlantis/core/dtos'
+
+import { useActionContext } from '@/ui/hooks'
 
 export function useCustomersPage() {
   const action = useActionContext()

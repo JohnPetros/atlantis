@@ -1,7 +1,8 @@
-import { H1 } from 'ui/components/h1'
+import type { clientLoader } from '@/app/routes/customers'
+
+import { H1 } from '@/ui/components/h1'
 import { CustomersTable } from './customers-tale'
 import { useLoaderData } from 'react-router'
-import type { clientLoader } from '~/routes/customers'
 import { useCustomersPage } from './use-customers-page'
 
 export const CustomersPageView = () => {

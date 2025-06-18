@@ -1,23 +1,20 @@
 ### Customer REST API Tests
 
-@baseUrl = http://localhost:3000
-@contentType = application/json
+@BASE_Url = http://localhost:3000
+@USERS_ID = e162481c-81fc-446c-abc3-a20f9efd3d5f
+@CONTENT_TYPE = application/json
 
 ### 1. Get All Customers
-GET {{baseUrl}}/customers
-Content-Type: {{contentType}}
-
-###
+GET {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 ### 2. Get Customer by ID
-GET {{baseUrl}}/customers/123
-Content-Type: {{contentType}}
-
-###
+GET {{BASE_Url}}/customers/{{USERS_ID}}
+Content-Type: {{CONTENT_TYPE}}
 
 ### 3. Create New Customer
-POST {{baseUrl}}/customers
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "John Doe",
@@ -57,11 +54,9 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 4. Create Customer with Dependents
-POST {{baseUrl}}/customers
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "Jane Smith",
@@ -121,11 +116,9 @@ Content-Type: {{contentType}}
   ]
 }
 
-###
-
 ### 5. Update Customer
-PUT {{baseUrl}}/customers/customer123
-Content-Type: {{contentType}}
+PUT {{BASE_Url}}/customers/{{USERS_ID}}
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "John Updated Doe",
@@ -156,11 +149,9 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 6. Add Dependent to Customer
-POST {{baseUrl}}/customers/customer123/dependents
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers/customer123/dependents
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "Dependent Child",
@@ -191,11 +182,9 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 7. Update Dependent
-PUT {{baseUrl}}/customers/customer123/dependents/dependent456
-Content-Type: {{contentType}}
+PUT {{BASE_Url}}/customers/customer123/dependents/dependent456
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "Updated Dependent Child",
@@ -235,23 +224,17 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 8. Remove Dependent
-DELETE {{baseUrl}}/customers/customer123/dependents/dependent456
-Content-Type: {{contentType}}
-
-###
+DELETE {{BASE_Url}}/customers/customer123/dependents/dependent456
+Content-Type: {{CONTENT_TYPE}}
 
 ### 9. Delete Customer
-DELETE {{baseUrl}}/customers/customer123
-Content-Type: {{contentType}}
-
-###
+DELETE {{BASE_Url}}/customers/customer123
+Content-Type: {{CONTENT_TYPE}}
 
 ### 10. Test Customer with Passport
-POST {{baseUrl}}/customers
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "International Traveler",
@@ -282,11 +265,9 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 11. Test Customer without Address
-POST {{baseUrl}}/customers
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "Homeless Person",
@@ -317,11 +298,9 @@ Content-Type: {{contentType}}
   "dependents": []
 }
 
-###
-
 ### 12. Test Customer with Multiple Dependents
-POST {{baseUrl}}/customers
-Content-Type: {{contentType}}
+POST {{BASE_Url}}/customers
+Content-Type: {{CONTENT_TYPE}}
 
 {
   "name": "Large Family Head",

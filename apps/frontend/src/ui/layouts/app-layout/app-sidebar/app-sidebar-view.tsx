@@ -1,4 +1,4 @@
-import { ROUTES } from 'constants/routes'
+import { ROUTES } from '@/constants/routes'
 import {
   BedDouble,
   Building,
@@ -11,7 +11,7 @@ import {
   Waves,
 } from 'lucide-react'
 import { Link } from 'react-router'
-import { Sidebar } from 'ui/components/sidebar'
+import { Sidebar } from '@/ui/components/sidebar'
 
 const items = [
   {

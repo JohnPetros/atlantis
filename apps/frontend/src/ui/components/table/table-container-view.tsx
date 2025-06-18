@@ -1,4 +1,4 @@
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = React.ComponentProps<'div'>
 

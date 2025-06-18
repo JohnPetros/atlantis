@@ -1,9 +1,9 @@
 import type { ComponentProps } from 'react'
 import { PanelLeftIcon } from 'lucide-react'
 
-import { cn } from 'ui/utils'
-import { Button } from 'ui/components/button'
-import { useSidebarContext } from 'ui/hooks'
+import { cn } from '@/ui/utils'
+import { Button } from '@/ui/components/button'
+import { useSidebarContext } from '@/ui/hooks'
 
 type Props = ComponentProps<typeof Button>
 

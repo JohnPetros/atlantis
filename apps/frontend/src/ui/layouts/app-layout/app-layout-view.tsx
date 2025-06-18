@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 
-import { Sidebar } from 'ui/components/sidebar'
-import { SidebarContextProvider } from 'ui/contexts/sidebar-context'
+import { Sidebar } from '@/ui/components/sidebar'
+import { SidebarContextProvider } from '@/ui/contexts/sidebar-context'
 import { AppSidebar } from './app-sidebar'
 
 export const AppLayoutView = ({ children }: PropsWithChildren) => {

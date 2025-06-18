@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 import { AlertDialogPortalView } from './alert-dialog-portal-view'
 import { AlertDialogOverlayView } from './alert-dialog-overlay-view'

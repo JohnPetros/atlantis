@@ -1,5 +1,5 @@
 import type { AccommodationDto, CustomerDto } from 'core/dtos'
-import { useActionContext } from 'ui/hooks'
+import { useActionContext } from '@/ui/hooks'
 
 export function useAccommodationsPage() {
   const action = useActionContext()

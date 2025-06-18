@@ -5,7 +5,7 @@ export class Entity<Props> {
   protected readonly props: Props
 
   constructor(props: Props, id?: string) {
-    this._id = id ?? generateId().slice(0, 4)
+    this._id = id ?? generateId()
     this.props = props
   }
 

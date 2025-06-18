@@ -1,4 +1,4 @@
-import type { Builder } from 'core/interfaces/Builder'
+import type { Builder } from '../interfaces/Builder'
 
 export abstract class Director<Object> {
   protected builder!: Builder<Object>

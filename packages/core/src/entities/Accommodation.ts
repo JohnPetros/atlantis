@@ -2,7 +2,7 @@ import type { AccommodationDto } from '../dtos'
 import { Entity } from './Entity'
 
 export type AccommodationProps = {
-  accommodationName: string
+  name: string
   singleBeds: number
   coupleBeds: number
   suites: number
@@ -14,7 +14,7 @@ export class Accommodation extends Entity<AccommodationProps> {
   static create(dto: AccommodationDto) {
     return new Accommodation(
       {
-        accommodationName: dto.name,
+        name: dto.name,
         singleBeds: dto.singleBeds,
         coupleBeds: dto.coupleBeds,
         suites: dto.suites,
@@ -25,8 +25,8 @@ export class Accommodation extends Entity<AccommodationProps> {
     )
   }
 
-  get accommodationName(): string {
-    return this.props.accommodationName
+  get name(): string {
+    return this.props.name
   }
 
   get singleBeds(): number {
@@ -52,7 +52,7 @@ export class Accommodation extends Entity<AccommodationProps> {
   get dto(): AccommodationDto {
     return {
       id: this.id,
-      name: this.accommodationName,
+      name: this.name,
       singleBeds: this.singleBeds,
       coupleBeds: this.coupleBeds,
       suites: this.suites,

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof SheetPrimitive.Title>
 

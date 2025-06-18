@@ -1,12 +1,12 @@
-import { Hosting } from 'core/entities/Hosting'
+import { Hosting } from '@atlantis/core/entities'
 import {
   accommodationsRepository,
   customersRepository,
   hostingsRepository,
-} from 'repositories'
-import { ActionContextProvider } from 'ui/contexts/action-context'
+} from '@/database/repositories'
+import { ActionContextProvider } from '@/ui/contexts/action-context'
 import type { Route } from './+types/customers'
-import { HostingsPage } from 'ui/pages/hostings'
+import { HostingsPage } from '@/ui/pages/hostings'
 
 export const clientLoader = async () => {
   const hostings = await hostingsRepository.findAll()

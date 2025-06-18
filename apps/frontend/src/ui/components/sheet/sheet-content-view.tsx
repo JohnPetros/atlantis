@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left'

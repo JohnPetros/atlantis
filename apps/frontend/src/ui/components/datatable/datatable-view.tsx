@@ -6,6 +6,7 @@ import { flexRender } from '@tanstack/react-table'
 import { Button } from '../button'
 import { Input } from '../input'
 import { Table } from '../table'
+import { Skeleton } from '../skeleton'
 
 type Props<TData> = {
   table: ReactTable<TData>
@@ -13,6 +14,7 @@ type Props<TData> = {
   columnsCount: number
   newRowTrigger: ReactNode
   onFilterChange: (value: string) => void
+  isLoading?: boolean
 }
 
 export const DataTableView = <TData,>({
@@ -21,7 +23,20 @@ export const DataTableView = <TData,>({
   filterValue,
   newRowTrigger,
   onFilterChange,
+  isLoading = false,
 }: Props<TData>) => {
+  const renderSkeletonRows = () => {
+    return Array.from({ length: 5 }).map((_, index) => (
+      <Table.Row key={`skeleton-${index}`}>
+        {Array.from({ length: columnsCount }).map((_, cellIndex) => (
+          <Table.Cell key={`skeleton-cell-${cellIndex}`}>
+            <Skeleton className='h-8 w-full' />
+          </Table.Cell>
+        ))}
+      </Table.Row>
+    ))
+  }
+
   return (
     <div className='rounded-md border p-6 w-sm sm:w-md md:w-3xl lg:w-[75vw] overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent'>
       <div className='flex items-center gap-3'>
@@ -30,6 +45,7 @@ export const DataTableView = <TData,>({
           value={filterValue}
           onChange={(event) => onFilterChange(event.target.value)}
           className='max-w-sm'
+          disabled={isLoading}
         />
         {newRowTrigger}
       </div>
@@ -50,7 +66,9 @@ export const DataTableView = <TData,>({
           ))}
         </Table.Header>
         <Table.Body className='max-w-sm'>
-          {table.getRowModel().rows?.length ? (
+          {isLoading ? (
+            renderSkeletonRows()
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <Table.Row key={row.id} data-state={row.getIsSelected() && 'selected'}>
                 {row.getVisibleCells().map((cell) => (
@@ -74,7 +92,7 @@ export const DataTableView = <TData,>({
           variant='outline'
           size='sm'
           onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
+          disabled={!table.getCanPreviousPage() || isLoading}
         >
           Anterior
         </Button>
@@ -82,7 +100,7 @@ export const DataTableView = <TData,>({
           variant='outline'
           size='sm'
           onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
+          disabled={!table.getCanNextPage() || isLoading}
         >
           Próximo
         </Button>

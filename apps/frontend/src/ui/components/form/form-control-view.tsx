@@ -1,6 +1,6 @@
 import { Slot } from '@radix-ui/react-slot'
 
-import { useFormContext } from 'ui/hooks/use-form-context'
+import { useFormContext } from '@/ui/hooks/use-form-context'
 
 type Props = React.ComponentProps<typeof Slot>
 

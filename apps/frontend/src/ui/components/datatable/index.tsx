@@ -7,9 +7,15 @@ type Props<TData> = {
   data: TData[]
   newRowTrigger: ReactNode
   columns: ColumnDef<TData, any>[]
+  isLoading?: boolean
 }
 
-export const DataTable = <TData,>({ data, columns, newRowTrigger }: Props<TData>) => {
+export const DataTable = <TData,>({
+  data,
+  columns,
+  newRowTrigger,
+  isLoading = false,
+}: Props<TData>) => {
   const { table, filterValue, handleFilterChange } = useDatatable(data, columns)
 
   return (
@@ -19,6 +25,7 @@ export const DataTable = <TData,>({ data, columns, newRowTrigger }: Props<TData>
       filterValue={filterValue}
       onFilterChange={handleFilterChange}
       newRowTrigger={newRowTrigger}
+      isLoading={isLoading}
     />
   )
 }

@@ -1,7 +1,7 @@
 import type { CSSProperties, PropsWithChildren } from 'react'
 
-import { Tooltip } from 'ui/components/tooltip'
-import { cn } from 'ui/utils/cn'
+import { Tooltip } from '@/ui/components/tooltip'
+import { cn } from '@/ui/utils/cn'
 
 const SIDEBAR_WIDTH = '12rem'
 const SIDEBAR_WIDTH_ICON = '3rem'

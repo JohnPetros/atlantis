@@ -1,0 +1,35 @@
+### Hosting REST API Tests
+
+@BASE_Url = http://localhost:3000
+@HOSTING_ID = eaa35938-d9c1-4f35-8094-dc459d6a9291
+@CONTENT_TYPE = application/json
+
+### 1. Get All Hostings
+GET {{BASE_Url}}/hostings
+Content-Type: {{CONTENT_TYPE}}
+
+### 2. Get Hosting by ID
+GET {{BASE_Url}}/hostings/{{HOSTING_ID}}
+Content-Type: {{CONTENT_TYPE}}
+
+### 3. Create Hosting
+POST {{BASE_Url}}/hostings
+Content-Type: {{CONTENT_TYPE}}
+
+{
+  "accomodationId": "fafd6138-9b37-4a57-a8a1-8e3600f8fec6",
+  "hostId": "c8c9ebeb-bd1c-4a3b-9ee9-63fc129b5928"
+}
+
+### 4. Update Hosting
+PUT {{BASE_Url}}/hostings/{{HOSTING_ID}}
+Content-Type: {{CONTENT_TYPE}}
+
+{
+  "accomodationId": "550f0b37-8ef3-4a33-a96c-e6dde52d9fe5",
+  "hostId": "c8c9ebeb-bd1c-4a3b-9ee9-63fc129b5928"
+}
+
+### 5. Delete Hosting
+DELETE {{BASE_Url}}/hostings/{{HOSTING_ID}}
+Content-Type: {{CONTENT_TYPE}}

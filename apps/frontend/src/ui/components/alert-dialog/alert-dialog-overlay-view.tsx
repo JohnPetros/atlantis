@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof AlertDialogPrimitive.Overlay> & {
   className?: string

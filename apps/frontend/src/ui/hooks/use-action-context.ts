@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ActionContext } from 'ui/contexts/action-context'
+import { ActionContext } from '@/ui/contexts/action-context'
 
 export function useActionContext() {
   const context = useContext(ActionContext)

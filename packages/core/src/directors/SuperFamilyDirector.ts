@@ -11,7 +11,7 @@ export class SuperFamilyDirector extends Director<Accommodation> {
   build(): Accommodation {
     const accommodation = this.builder as AccomodationBuilder
     return accommodation
-      .setAccomodationName('Família Super')
+      .setName('Família Super')
       .setSingleBeds(6)
       .setCoupleBeds(2)
       .setGarages(2)

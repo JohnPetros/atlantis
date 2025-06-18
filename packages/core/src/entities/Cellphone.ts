@@ -1,6 +1,6 @@
-import type { Prototype } from 'core/interfaces/Prototype'
+import type { Prototype } from '../interfaces/Prototype'
+import type { CellphoneDto } from '../dtos'
 import { Entity } from './Entity'
-import type { CellphoneDto } from 'core/dtos'
 
 type CellphoneProps = {
   ddd: string

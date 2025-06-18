@@ -1,1 +1,3 @@
-export { customersRouter } from './customers-router.js'
+export { customersRouter } from './customers-router'
+export { accommodationsRouter } from './accomodations-router'
+export { hostingsRouter } from './hostings-router'

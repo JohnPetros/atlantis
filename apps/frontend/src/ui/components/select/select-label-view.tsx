@@ -1,6 +1,6 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = React.ComponentProps<typeof SelectPrimitive.Label>
 

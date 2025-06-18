@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import { useMemo } from 'react'
-import { cn } from 'ui/utils'
-import { Skeleton } from 'ui/components/skeleton'
+import { cn } from '@/ui/utils'
+import { Skeleton } from '@/ui/components/skeleton'
 
 type Props = ComponentProps<'div'> & {
   showIcon?: boolean

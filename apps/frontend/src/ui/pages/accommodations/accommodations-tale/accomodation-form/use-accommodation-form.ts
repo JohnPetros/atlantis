@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import type { AccommodationDto } from 'core/dtos'
+import type { AccommodationDto } from '@atlantis/core/dtos'
 
 const formSchema = z.object({
   name: z.string().min(0, {

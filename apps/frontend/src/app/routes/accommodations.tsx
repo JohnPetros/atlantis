@@ -1,12 +1,11 @@
 import type { Route } from './+types/accommodations'
 
-import { Accommodation } from 'core/entities/Accommodation'
-import { accommodationsRepository } from 'repositories'
-import { ActionContextProvider } from 'ui/contexts/action-context'
-import { AccommodationsPage } from 'ui/pages/accommodations'
-
+import { Accommodation } from '@atlantis/core/entities'
+import { ActionContextProvider } from '@/ui/contexts/action-context'
+import { AccommodationsPage } from '@/ui/pages/accommodations'
+import { accommodationsRepository } from '@/database/repositories'
 export const clientLoader = async () => {
-  return await accommodationsRepository.findAll()
+  return await accommodationsRep  ository.findAll()
 }
 
 export async function clientAction({ request }: Route.ClientActionArgs) {

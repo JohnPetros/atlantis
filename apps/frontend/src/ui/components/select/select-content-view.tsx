@@ -4,7 +4,7 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 
 import { SelectScrollUpButtonView } from './select-scroll-up-button-view'
 import { SelectScrollDownButtonView } from './select-scroll-down-button-view'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 export function SelectContentView({
   className,

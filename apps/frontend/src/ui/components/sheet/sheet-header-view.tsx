@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<'div'>
 

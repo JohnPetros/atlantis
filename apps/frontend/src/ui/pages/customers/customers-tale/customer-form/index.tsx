@@ -1,7 +1,9 @@
-import type { CustomerDto } from 'core/dtos'
-import { CustomerFormView } from './customer-form-view'
 import { useLoaderData } from 'react-router'
-import type { clientLoader } from '~/routes/customers'
+
+import type { clientLoader } from '@/app/routes/customers'
+import type { CustomerDto } from '@atlantis/core/dtos'
+import { CustomerFormView } from './customer-form-view'
+import { useActionContext } from '@/ui/hooks'
 
 type Props = {
   customerId?: string
@@ -10,10 +12,10 @@ type Props = {
 }
 
 export const CustomerForm = ({ customerId, isDependent, onSubmit }: Props) => {
+  const { isExecuting } = useActionContext()
   const data = useLoaderData<typeof clientLoader>()
   let customer: CustomerDto | undefined
 
-  console.log('isDependent', isDependent)
   if (isDependent) {
     const dependents = data.flatMap((customer) => customer.dependents)
     customer = dependents.find((dependent) => dependent.id === customerId)
@@ -22,6 +24,11 @@ export const CustomerForm = ({ customerId, isDependent, onSubmit }: Props) => {
   }
 
   return (
-    <CustomerFormView customer={customer} isDependent={isDependent} onSubmit={onSubmit} />
+    <CustomerFormView
+      customer={customer}
+      isDependent={isDependent}
+      isLoading={isExecuting}
+      onSubmit={onSubmit}
+    />
   )
 }

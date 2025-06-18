@@ -1,10 +1,12 @@
 import type { HostingDto } from '@atlantis/core/dtos'
-import { Hosting } from '@atlantis/core/entities'
-import { prisma } from '../prisma.js'
+import { prisma } from '../prisma'
 
 export class HostingsRepository {
   async findAll(): Promise<HostingDto[]> {
     const hostings = await prisma.hosting.findMany({
+      orderBy: {
+        createdAt: 'asc',
+      },
       include: {
         accommodation: true,
         host: {
@@ -12,11 +14,7 @@ export class HostingsRepository {
             address: true,
             cellphones: true,
             documents: true,
-          },
-        },
-        hostDocuments: {
-          include: {
-            document: true,
+            dependents: true,
           },
         },
       },
@@ -35,11 +33,7 @@ export class HostingsRepository {
             address: true,
             cellphones: true,
             documents: true,
-          },
-        },
-        hostDocuments: {
-          include: {
-            document: true,
+            dependents: true,
           },
         },
       },
@@ -49,42 +43,20 @@ export class HostingsRepository {
   }
 
   async add(hostingDto: HostingDto): Promise<void> {
-    const hosting = Hosting.create(hostingDto)
-
     await prisma.hosting.create({
       data: {
-        id: hosting.id,
-        accommodationId: hosting.accomodationId,
-        accommodationName: hosting.accomodationName,
-        hostId: hosting.hostId,
-        hostName: hosting.hostName,
-        hostDependentsCount: hosting.hostDependentsCount,
-        hostDocuments: {
-          create: hosting.hostDocuments.map((document: any) => ({
-            documentId: document.id,
-          })),
-        },
+        accommodationId: hostingDto.accomodationId,
+        hostId: hostingDto.hostId,
       },
     })
   }
 
   async update(hostingDto: HostingDto): Promise<void> {
-    const hosting = Hosting.create(hostingDto)
-
     await prisma.hosting.update({
-      where: { id: hosting.id },
+      where: { id: hostingDto.id },
       data: {
-        accommodationId: hosting.accomodationId,
-        accommodationName: hosting.accomodationName,
-        hostId: hosting.hostId,
-        hostName: hosting.hostName,
-        hostDependentsCount: hosting.hostDependentsCount,
-        hostDocuments: {
-          deleteMany: {},
-          create: hosting.hostDocuments.map((document: any) => ({
-            documentId: document.id,
-          })),
-        },
+        accommodationId: hostingDto.accomodationId,
+        hostId: hostingDto.hostId,
       },
     })
   }
@@ -99,16 +71,16 @@ export class HostingsRepository {
     return {
       id: hosting.id,
       accomodationId: hosting.accommodationId,
-      accomodationName: hosting.accommodationName,
+      accomodationName: hosting.accommodation.name,
       hostId: hosting.hostId,
-      hostName: hosting.hostName,
-      hostDocuments: hosting.hostDocuments.map((hostingDocument: any) => ({
-        id: hostingDocument.document.id,
-        number: hostingDocument.document.number,
-        type: hostingDocument.document.type,
-        expeditionDate: hostingDocument.document.expeditionDate.toISOString(),
+      hostName: hosting.host.name,
+      hostDocuments: hosting.host.documents.map((hostingDocument: any) => ({
+        id: hostingDocument.id,
+        number: hostingDocument.number,
+        type: hostingDocument.type,
+        expeditionDate: hostingDocument.expeditionDate.toISOString(),
       })),
-      hostDependentsCount: hosting.hostDependentsCount,
+      hostDependentsCount: hosting.host.dependents.length,
     }
   }
 }

@@ -11,7 +11,7 @@ export class PlusFamilyDirector extends Director<Accommodation> {
   build(): Accommodation {
     const accommodation = this.builder as AccomodationBuilder
     return accommodation
-      .setAccomodationName('Família Mais')
+      .setName('Família Mais')
       .setSingleBeds(5)
       .setCoupleBeds(1)
       .setSuites(2)

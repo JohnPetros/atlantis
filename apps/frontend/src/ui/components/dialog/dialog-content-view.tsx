@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 import { DialogPortalView } from './dialog-portal-view'
 import { DialogOverlayView } from './dialog-overlay-view'

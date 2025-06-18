@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
 import { Input } from '../input'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof Input>
 

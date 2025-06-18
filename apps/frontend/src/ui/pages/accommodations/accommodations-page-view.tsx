@@ -1,8 +1,7 @@
 import { useLoaderData } from 'react-router'
-import { H1 } from 'ui/components/h1'
-import { useCustomersPage } from '../customers/use-customers-page'
-import { AccommodationsTable } from './accommodations-tale'
+import { H1 } from '@/ui/components/h1'
 import type { clientLoader } from '~/routes/accommodations'
+import { AccommodationsTable } from './accommodations-tale'
 import { useAccommodationsPage } from './use-accommodations-page'
 
 export const AccommodationsPageView = () => {

@@ -21,8 +21,8 @@ model Customer {
   birthDate        DateTime
   registrationDate DateTime
   isHosted         Boolean  @default(false)
+  createdAt        DateTime @default(now())
 
-  // Relationships
   cellphones Cellphone[]
   documents  Document[]
   address    Address?
@@ -30,7 +30,6 @@ model Customer {
   parent     Customer?   @relation("CustomerDependents", fields: [parentId], references: [id])
   parentId   String?
 
-  // Hosting relationship
   hostings Hosting[]
 
   @@map("customers")
@@ -45,7 +44,6 @@ model Address {
   country      String
   zipcode      String
 
-  // Relationships
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String   @unique
 
@@ -57,7 +55,6 @@ model Cellphone {
   ddd    String
   number String
 
-  // Relationships
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String
 
@@ -70,56 +67,35 @@ model Document {
   type           DocumentType
   expeditionDate DateTime
 
-  // Relationships
   customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
   customerId String
-
-  // Hosting relationship
-  hostings HostingDocument[]
 
   @@map("documents")
 }
 
 model Accommodation {
-  id                 String  @id @default(uuid())
-  accommodationName  String
+  id                 String   @id @default(uuid())
+  name               String
   singleBeds         Int
   coupleBeds         Int
   suites             Int
   garages            Int
   hasAirConditioning Boolean
+  createdAt          DateTime @default(now())
 
-  // Relationships
   hostings Hosting[]
 
   @@map("accommodations")
 }
 
 model Hosting {
-  id                  String @id @default(uuid())
-  accommodationId     String
-  accommodationName   String
-  hostId              String
-  hostName            String
-  hostDependentsCount Int
+  id              String   @id @default(uuid())
+  accommodationId String
+  hostId          String
+  createdAt       DateTime @default(now())
 
-  // Relationships
-  accommodation Accommodation     @relation(fields: [accommodationId], references: [id])
-  host          Customer          @relation(fields: [hostId], references: [id])
-  hostDocuments HostingDocument[]
+  accommodation Accommodation @relation(fields: [accommodationId], references: [id])
+  host          Customer      @relation(fields: [hostId], references: [id])
 
   @@map("hostings")
-}
-
-model HostingDocument {
-  id         String @id @default(uuid())
-  hostingId  String
-  documentId String
-
-  // Relationships
-  hosting  Hosting  @relation(fields: [hostingId], references: [id], onDelete: Cascade)
-  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-
-  @@unique([hostingId, documentId])
-  @@map("hosting_documents")
 }

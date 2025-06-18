@@ -1,6 +1,6 @@
 import { useId, type PropsWithChildren } from 'react'
-import { FormItemContextProvider } from 'ui/contexts/form-context'
-import { cn } from 'ui/utils'
+import { FormItemContextProvider } from '@/ui/contexts/form-context'
+import { cn } from '@/ui/utils'
 
 type Props = PropsWithChildren<{
   className?: string

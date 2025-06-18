@@ -1,49 +1,40 @@
 import type { Route } from './+types/customers'
 
-import { CustomersPage } from 'ui/pages/customers'
-import { Customer } from 'core/entities/Customer'
-import { customersRepository } from 'repositories'
-import { ActionContextProvider } from 'ui/contexts/action-context'
+import { Customer } from '@atlantis/core/entities'
+
+import { CustomersPage } from '@/ui/pages/customers'
+import { ActionContextProvider } from '@/ui/contexts/action-context'
+import { customerService } from '@/services'
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
   const action = await request.json()
 
   if (action.name === 'create-customer') {
     const customer = Customer.create(action.payload)
-    await customersRepository.add(customer.dto)
+    await customerService.createCustomer(customer.dto)
   }
 
   if (action.name === 'create-dependent') {
-    const customer = await customersRepository.findById(action.payload.customerId)
-    const dependent = Customer.create({
-      ...action.payload.dependent,
-      address: customer?.address,
-      cellphones: customer?.cellphones,
-    })
-    await customersRepository.addDependent(action.payload.customerId, dependent.dto)
+    const dependent = Customer.create(action.payload.dependent)
+    await customerService.createDependent(action.payload.customerId, dependent.dto)
   }
 
   if (action.name === 'update-customer') {
     const customer = Customer.create(action.payload)
-    await customersRepository.update(customer.dto)
+    await customerService.updateCustomer(customer.dto)
   }
 
   if (action.name === 'update-dependent') {
-    const customer = await customersRepository.findById(action.payload.customerId)
-    const dependent = Customer.create({
-      ...action.payload.dependent,
-      address: customer?.address,
-      cellphones: customer?.cellphones,
-    })
-    await customersRepository.updateDependent(action.payload.customerId, dependent.dto)
+    const dependent = Customer.create(action.payload.dependent)
+    await customerService.updateDependent(action.payload.customerId, dependent.dto)
   }
 
   if (action.name === 'delete-customer') {
-    await customersRepository.remove(action.payload.customerId)
+    await customerService.deleteCustomer(action.payload.customerId)
   }
 
   if (action.name === 'delete-dependent') {
-    await customersRepository.removeDependent(
+    await customerService.deleteDependent(
       action.payload.customerId,
       action.payload.dependentId,
     )
@@ -51,7 +42,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 }
 
 export const clientLoader = async () => {
-  return await customersRepository.findAll()
+  return await customerService.getAllCustomers()
 }
 
 const CustomersRoute = () => {

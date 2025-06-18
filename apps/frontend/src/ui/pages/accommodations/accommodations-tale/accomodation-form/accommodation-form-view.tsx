@@ -1,8 +1,9 @@
-import type { AccommodationDto } from 'core/dtos'
-import { Form } from 'ui/components/form'
-import { Input } from 'ui/components/input'
-import { Button } from 'ui/components/button'
-import { Switch } from 'ui/components/switch'
+import type { AccommodationDto } from '@atlantis/core/dtos'
+
+import { Form } from '@/ui/components/form'
+import { Input } from '@/ui/components/input'
+import { Button } from '@/ui/components/button'
+import { Switch } from '@/ui/components/switch'
 import { useAccommodationForm } from './use-accommodation-form'
 
 type Props = {

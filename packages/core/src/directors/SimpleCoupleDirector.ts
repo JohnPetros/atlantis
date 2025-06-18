@@ -11,7 +11,7 @@ export class SimpleCupleDirector extends Director<Accommodation> {
   build(): Accommodation {
     const accommodation = this.builder as AccomodationBuilder
     return accommodation
-      .setAccomodationName('Casal Simples')
+      .setName('Casal Simples')
       .setSingleBeds(0)
       .setCoupleBeds(1)
       .setGarages(1)

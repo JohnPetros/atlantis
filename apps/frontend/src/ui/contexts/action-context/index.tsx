@@ -3,6 +3,7 @@ import { useFetcher, type SubmitTarget } from 'react-router'
 
 type ActionContextValue = {
   dispatch: (name: string, payload: unknown) => Promise<void>
+  isExecuting: boolean
 }
 
 export const ActionContext = createContext<ActionContextValue | null>(null)
@@ -20,5 +21,14 @@ export function ActionContextProvider({ children }: PropsWithChildren) {
     [fetcher.submit],
   )
 
-  return <ActionContext.Provider value={{ dispatch }}>{children}</ActionContext.Provider>
+  return (
+    <ActionContext.Provider
+      value={{
+        dispatch,
+        isExecuting: fetcher.state === 'loading' || fetcher.state === 'submitting',
+      }}
+    >
+      {children}
+    </ActionContext.Provider>
+  )
 }

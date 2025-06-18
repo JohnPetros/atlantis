@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactNode } from 'react'
-import { Dialog } from 'ui/components/dialog'
+import { Dialog } from '@/ui/components/dialog'
 
 type Props = {
   title: string

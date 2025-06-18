@@ -1,0 +1,42 @@
+### Accommodation REST API Tests
+
+@BASE_Url = http://localhost:3000
+@ACCOMMODATION_ID = aba783ce-d892-4556-a91c-9617a4b76b65
+@CONTENT_TYPE = application/json
+
+### 1. Get All Accommodations
+GET {{BASE_Url}}/accommodations
+Content-Type: {{CONTENT_TYPE}}
+
+### 2. Get Accommodation by ID
+GET {{BASE_Url}}/accommodations/{{ACCOMMODATION_ID}}
+Content-Type: {{CONTENT_TYPE}}
+
+### 3. Create Accommodation
+POST {{BASE_Url}}/accommodations
+Content-Type: {{CONTENT_TYPE}}
+
+{
+  "name": "Quarto Individual Simples",
+  "singleBeds": 1,
+  "coupleBeds": 0,
+  "suites": 0,
+  "garages": 0,
+  "hasAirConditioning": false
+}
+
+### 8. Update Accommodation
+PUT {{BASE_Url}}/accommodations/{{ACCOMMODATION_ID}}
+Content-Type: {{CONTENT_TYPE}}
+
+{
+  "name": "Quarto Individual Atualizado",
+  "singleBeds": 2,
+  "coupleBeds": 0,
+  "suites": 1,
+  "garages": 1,
+  "hasAirConditioning": true
+}
+### 10. Delete Accommodation
+DELETE {{BASE_Url}}/accommodations/{{ACCOMMODATION_ID}}
+Content-Type: {{CONTENT_TYPE}}

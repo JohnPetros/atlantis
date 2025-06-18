@@ -8,11 +8,11 @@ import {
 } from 'lucide-react'
 
 import type { HostingDto } from 'core/dtos'
-import { DataTable } from 'ui/components/datatable'
-import { Button } from 'ui/components/button'
-import { DropdownMenu } from 'ui/components/dropdown-menu'
-import { FormDialog } from 'ui/components/form-dialog'
-import { AlertMessageDialog } from 'ui/components/alert-message-dialog'
+import { DataTable } from '@/ui/components/datatable'
+import { Button } from '@/ui/components/button'
+import { DropdownMenu } from '@/ui/components/dropdown-menu'
+import { FormDialog } from '@/ui/components/form-dialog'
+import { AlertMessageDialog } from '@/ui/components/alert-message-dialog'
 import { HostingForm } from './hosting-form'
 import { DocumentFormatter } from 'core/formatters'
 

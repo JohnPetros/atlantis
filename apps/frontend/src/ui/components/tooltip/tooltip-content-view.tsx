@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof TooltipPrimitive.Content>
 

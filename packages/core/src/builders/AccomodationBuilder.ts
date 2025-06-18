@@ -2,7 +2,7 @@ import { Accommodation } from '../entities/Accommodation'
 import type { Builder } from '../interfaces/Builder'
 
 export class AccomodationBuilder implements Builder<Accommodation> {
-  private accomodationName: string
+  private name: string
   private singleBeds: number
   private coupleBeds: number
   private suites: number
@@ -10,7 +10,7 @@ export class AccomodationBuilder implements Builder<Accommodation> {
   private hasAirConditioning: boolean
 
   constructor() {
-    this.accomodationName = 'solteiro simples'
+    this.name = 'solteiro simples'
     this.singleBeds = 0
     this.coupleBeds = 0
     this.suites = 0
@@ -18,8 +18,8 @@ export class AccomodationBuilder implements Builder<Accommodation> {
     this.garages = 0
   }
 
-  setAccomodationName(accomodationName: string): this {
-    this.accomodationName = accomodationName
+  setName(name: string): this {
+    this.name = name
     return this
   }
 
@@ -50,7 +50,7 @@ export class AccomodationBuilder implements Builder<Accommodation> {
 
   build(): Accommodation {
     const accomodation = new Accommodation({
-      accommodationName: this.accomodationName,
+      name: this.name,
       singleBeds: this.singleBeds,
       coupleBeds: this.coupleBeds,
       suites: this.suites,

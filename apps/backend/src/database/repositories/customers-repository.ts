@@ -1,21 +1,35 @@
 import type { CustomerDto } from '@atlantis/core/dtos'
 import { Customer } from '@atlantis/core/entities'
 import { prisma } from '../prisma.js'
+import { CustomersFaker } from '@atlantis/core/fakers'
 
 export class CustomersRepository {
+  constructor() {
+    this.seed()
+  }
+
   async findAll(): Promise<CustomerDto[]> {
     const customers = await prisma.customer.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
       include: {
         address: true,
         cellphones: true,
         documents: true,
         dependents: {
+          orderBy: {
+            createdAt: 'desc',
+          },
           include: {
             address: true,
             cellphones: true,
             documents: true,
           },
         },
+      },
+      where: {
+        parentId: null,
       },
     })
 
@@ -24,12 +38,15 @@ export class CustomersRepository {
 
   async findById(id: string): Promise<CustomerDto | null> {
     const customer = await prisma.customer.findUnique({
-      where: { id },
+      where: { id, parentId: null },
       include: {
         address: true,
         cellphones: true,
         documents: true,
         dependents: {
+          orderBy: {
+            createdAt: 'asc',
+          },
           include: {
             address: true,
             cellphones: true,
@@ -83,7 +100,15 @@ export class CustomersRepository {
   }
 
   async addDependent(customerId: string, dependentDto: CustomerDto): Promise<void> {
-    const dependent = Customer.create(dependentDto)
+    const customerDto = await this.findById(customerId)
+    if (!customerDto) return
+
+    const customer = Customer.create(customerDto)
+    const dependent = Customer.create({
+      ...dependentDto,
+      address: customer?.address.clone(),
+      cellphones: customer?.cellphones.map((cellphone) => cellphone.clone()),
+    })
 
     await prisma.customer.update({
       where: { id: customerId },
@@ -182,7 +207,15 @@ export class CustomersRepository {
   }
 
   async updateDependent(customerId: string, dependentDto: CustomerDto): Promise<void> {
-    const dependent = Customer.create(dependentDto)
+    const customerDto = await this.findById(customerId)
+    if (!customerDto) return
+
+    const customer = Customer.create(customerDto)
+    const dependent = Customer.create({
+      ...dependentDto,
+      address: customer?.address.clone(),
+      cellphones: customer?.cellphones.map((cellphone) => cellphone.clone()),
+    })
 
     await prisma.customer.update({
       where: {
@@ -251,6 +284,17 @@ export class CustomersRepository {
         parentId: customerId,
       },
     })
+  }
+
+  private async seed() {
+    const count = await prisma.customer.count()
+
+    if (count === 0) {
+      const customers = CustomersFaker.fakeMany(1000)
+      for (const customer of customers) {
+        await this.add(customer.dto)
+      }
+    }
   }
 
   private mapToDto(customer: any): CustomerDto {

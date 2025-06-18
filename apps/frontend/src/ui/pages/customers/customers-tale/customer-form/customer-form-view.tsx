@@ -1,18 +1,24 @@
 import { Plus, Trash } from 'lucide-react'
 
-import type { CustomerDto } from 'core/dtos'
-import { Form } from 'ui/components/form'
-import { Input } from 'ui/components/input'
-import { Button } from 'ui/components/button'
+import type { CustomerDto } from '@atlantis/core/dtos'
+import { Form } from '@/ui/components/form'
+import { Input } from '@/ui/components/input'
+import { Button } from '@/ui/components/button'
 import { useCustomerForm } from './use-customer-form'
 
 type Props = {
   customer?: CustomerDto
   isDependent: boolean
+  isLoading: boolean
   onSubmit: (customer: CustomerDto) => Promise<void>
 }
 
-export const CustomerFormView = ({ customer, isDependent = false, onSubmit }: Props) => {
+export const CustomerFormView = ({
+  customer,
+  isDependent = false,
+  isLoading = false,
+  onSubmit,
+}: Props) => {
   const {
     form,
     cellphonesFields,
@@ -321,7 +327,7 @@ export const CustomerFormView = ({ customer, isDependent = false, onSubmit }: Pr
           </>
         )}
 
-        <Button type='submit' size='lg' className='mt-6 self-end'>
+        <Button type='submit' size='lg' className='mt-6 self-end' isLoading={isLoading}>
           Salvar
         </Button>
       </form>

@@ -1,7 +1,7 @@
 import type { ComponentProps, PropsWithChildren } from 'react'
 import { NavLink } from 'react-router'
 
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = {
   to: string

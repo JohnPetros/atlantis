@@ -1,7 +1,7 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import type { ComponentProps } from 'react'
 import { ChevronRightIcon } from 'lucide-react'
-import { cn } from 'ui/utils'
+import { cn } from '@/ui/utils'
 
 type Props = ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
   className?: string
