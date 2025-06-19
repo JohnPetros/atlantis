@@ -1,7 +1,4 @@
 import type { ColumnDef } from '@tanstack/react-table'
-
-import { DataTable } from '@/ui/components/datatable'
-import { Button } from '@/ui/components/button'
 import {
   ArrowUpDown,
   MoreHorizontal,
@@ -9,6 +6,10 @@ import {
   PlusIcon,
   TrashIcon,
 } from 'lucide-react'
+
+import { DataTable } from '@/ui/components/datatable'
+import { Button } from '@/ui/components/button'
+
 import type { CustomerDto } from '@atlantis/core/dtos'
 import {
   AddressFormatter,

@@ -14,7 +14,7 @@ export const CustomersService = () => {
     },
 
     async createCustomer(customer: CustomerDto) {
-      await fetch(`${BACKEND_BASE_URL}/customers`, {
+      return await fetch(`${BACKEND_BASE_URL}/customers`, {
         method: 'POST',
         body: JSON.stringify(customer),
         headers: {
@@ -24,7 +24,7 @@ export const CustomersService = () => {
     },
 
     async updateCustomer(customer: CustomerDto) {
-      await fetch(`${BACKEND_BASE_URL}/customers/${customer.id}`, {
+      return await fetch(`${BACKEND_BASE_URL}/customers/${customer.id}`, {
         method: 'PUT',
         body: JSON.stringify(customer),
         headers: {
@@ -34,7 +34,7 @@ export const CustomersService = () => {
     },
 
     async updateDependent(customerId: string, dependent: CustomerDto) {
-      await fetch(
+      return await fetch(
         `${BACKEND_BASE_URL}/customers/${customerId}/dependents/${dependent.id}`,
         {
           method: 'PUT',
@@ -47,7 +47,7 @@ export const CustomersService = () => {
     },
 
     async deleteDependent(customerId: string, dependentId: string) {
-      await fetch(
+      return await fetch(
         `${BACKEND_BASE_URL}/customers/${customerId}/dependents/${dependentId}`,
         {
           method: 'DELETE',
@@ -56,7 +56,7 @@ export const CustomersService = () => {
     },
 
     async createDependent(customerId: string, dependent: CustomerDto) {
-      await fetch(`${BACKEND_BASE_URL}/customers/${customerId}/dependents`, {
+      return await fetch(`${BACKEND_BASE_URL}/customers/${customerId}/dependents`, {
         method: 'POST',
         body: JSON.stringify(dependent),
         headers: {
@@ -66,7 +66,7 @@ export const CustomersService = () => {
     },
 
     async deleteCustomer(customerId: string) {
-      await fetch(`${BACKEND_BASE_URL}/customers/${customerId}`, {
+      return await fetch(`${BACKEND_BASE_URL}/customers/${customerId}`, {
         method: 'DELETE',
       })
     },

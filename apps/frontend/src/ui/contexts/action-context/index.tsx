@@ -1,5 +1,6 @@
-import { createContext, useCallback, type PropsWithChildren } from 'react'
+import { createContext, useCallback, useEffect, type PropsWithChildren } from 'react'
 import { useFetcher, type SubmitTarget } from 'react-router'
+import { toast } from 'sonner'
 
 type ActionContextValue = {
   dispatch: (name: string, payload: unknown) => Promise<void>
@@ -20,6 +21,12 @@ export function ActionContextProvider({ children }: PropsWithChildren) {
     },
     [fetcher.submit],
   )
+
+  useEffect(() => {
+    if (fetcher.data?.error) {
+      toast.error(fetcher.data.error.message)
+    }
+  }, [fetcher.data?.error])
 
   return (
     <ActionContext.Provider

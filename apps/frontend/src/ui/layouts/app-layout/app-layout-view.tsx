@@ -3,6 +3,7 @@ import type { PropsWithChildren } from 'react'
 import { Sidebar } from '@/ui/components/sidebar'
 import { SidebarContextProvider } from '@/ui/contexts/sidebar-context'
 import { AppSidebar } from './app-sidebar'
+import { Toast } from '@/ui/components/toast'
 
 export const AppLayoutView = ({ children }: PropsWithChildren) => {
   return (
@@ -12,6 +13,7 @@ export const AppLayoutView = ({ children }: PropsWithChildren) => {
         <Sidebar.Trigger />
         <div className='py-2'>{children}</div>
       </main>
+      <Toast />
     </SidebarContextProvider>
   )
 }

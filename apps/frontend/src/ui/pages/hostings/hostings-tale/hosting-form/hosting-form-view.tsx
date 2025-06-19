@@ -1,10 +1,13 @@
-import type { AccommodationDto, CustomerDto, HostingDto } from 'core/dtos'
+import type { AccommodationDto, CustomerDto, HostingDto } from '@atlantis/core/dtos'
+import { DocumentFormatter } from '@atlantis/core/formatters'
+
 import { Form } from '@/ui/components/form'
 import { Button } from '@/ui/components/button'
 import { Select } from '@/ui/components/select'
 import { useHostingForm } from './use-hosting-form'
 
 type Props = {
+  isLoading: boolean
   hosting?: HostingDto
   customers: CustomerDto[]
   accommodations: AccommodationDto[]
@@ -12,6 +15,7 @@ type Props = {
 }
 
 export const HostingFormView = ({
+  isLoading,
   hosting,
   accommodations,
   customers,
@@ -59,13 +63,18 @@ export const HostingFormView = ({
                 <Form.Label>Cliente</Form.Label>
                 <Form.Control>
                   <Select.Container onValueChange={field.onChange} value={field.value}>
-                    <Select.Trigger className='w-full'>
+                    <Select.Trigger className='w-full md:w-[280px]'>
                       <Select.Value placeholder='Cliente' />
                     </Select.Trigger>
                     <Select.Content>
                       {customers?.map((customer) => (
                         <Select.Item key={customer.id} value={String(customer.id)}>
-                          {customer.name}
+                          {customer.name} |{' '}
+                          {customer.documents
+                            .map((document) =>
+                              DocumentFormatter.format(document.type, document.number),
+                            )
+                            .join('; ')}
                         </Select.Item>
                       ))}
                     </Select.Content>
@@ -77,7 +86,7 @@ export const HostingFormView = ({
           />
         </Form.Group>
 
-        <Button type='submit' size='lg' className='mt-6 self-end'>
+        <Button type='submit' size='lg' className='mt-6 self-end' disabled={isLoading}>
           Salvar
         </Button>
       </form>

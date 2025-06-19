@@ -1,4 +1,4 @@
-import type { AccommodationDto, CustomerDto } from 'core/dtos'
+import type { AccommodationDto } from '@atlantis/core/dtos'
 import { useActionContext } from '@/ui/hooks'
 
 export function useAccommodationsPage() {

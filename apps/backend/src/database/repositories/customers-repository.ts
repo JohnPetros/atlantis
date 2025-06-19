@@ -1,7 +1,8 @@
-import type { CustomerDto } from '@atlantis/core/dtos'
+import type { CellphoneDto, CustomerDto, DocumentDto } from '@atlantis/core/dtos'
 import { Customer } from '@atlantis/core/entities'
 import { prisma } from '../prisma.js'
 import { CustomersFaker } from '@atlantis/core/fakers'
+import type { DocumentType } from '@atlantis/core/enums'
 
 export class CustomersRepository {
   constructor() {
@@ -57,6 +58,20 @@ export class CustomersRepository {
     })
 
     return customer ? this.mapToDto(customer) : null
+  }
+
+  async hasDocument(document: DocumentDto): Promise<boolean> {
+    const documentExists = await prisma.document.findFirst({
+      where: { number: document.number, type: document.type as DocumentType },
+    })
+    return Boolean(documentExists)
+  }
+
+  async hasCellphone(cellphone: CellphoneDto): Promise<boolean> {
+    const cellphoneExists = await prisma.cellphone.findFirst({
+      where: { number: cellphone.number, ddd: cellphone.ddd },
+    })
+    return Boolean(cellphoneExists)
   }
 
   async add(customerDto: CustomerDto): Promise<void> {

@@ -1,3 +1,6 @@
 export { Accommodation } from './Accommodation'
 export { Customer } from './Customer'
 export { Hosting } from './Hosting'
+export { Document } from './Document'
+export { Cellphone } from './Cellphone'
+export { Address } from './Address'

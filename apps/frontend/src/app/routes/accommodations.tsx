@@ -3,9 +3,10 @@ import type { Route } from './+types/accommodations'
 import { Accommodation } from '@atlantis/core/entities'
 import { ActionContextProvider } from '@/ui/contexts/action-context'
 import { AccommodationsPage } from '@/ui/pages/accommodations'
-import { accommodationsRepository } from '@/database/repositories'
+import { accommodationsService } from '@/services'
+
 export const clientLoader = async () => {
-  return await accommodationsRep  ository.findAll()
+  return await accommodationsService.getAllAccommodations()
 }
 
 export async function clientAction({ request }: Route.ClientActionArgs) {
@@ -13,16 +14,27 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
 
   if (action.name === 'create-accommodation') {
     const accommodation = Accommodation.create(action.payload)
-    await accommodationsRepository.add(accommodation.dto)
+    const response = await accommodationsService.createAccommodation(accommodation.dto)
+    if (!response.ok) {
+      return { error: await response.json() }
+    }
   }
 
   if (action.name === 'update-accommodation') {
     const accommodation = Accommodation.create(action.payload)
-    await accommodationsRepository.update(accommodation.dto)
+    const response = await accommodationsService.updateAccommodation(accommodation.dto)
+    if (!response.ok) {
+      return { error: await response.json() }
+    }
   }
 
   if (action.name === 'delete-accommodation') {
-    await accommodationsRepository.remove(action.payload.accommodationId)
+    const response = await accommodationsService.deleteAccommodation(
+      action.payload.accommodationId,
+    )
+    if (!response.ok) {
+      return { error: await response.json() }
+    }
   }
 }
 

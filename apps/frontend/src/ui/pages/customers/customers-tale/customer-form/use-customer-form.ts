@@ -35,6 +35,9 @@ const formSchema = z.object({
       })
       .max(11, {
         message: 'CPF deve ter 11 dígitos.',
+      })
+      .regex(/^\d+$/, {
+        message: 'CPF deve conter apenas números.',
       }),
     expeditionDate: z.string({ required_error: 'Data de expedição é obrigatória.' }),
   }),
@@ -51,13 +54,14 @@ const formSchema = z.object({
 
         if (!hasNumber && !hasDate) return true
 
-        if (hasNumber && hasDate && hasNumber.length === 9) return true
+        if (hasNumber && hasDate && hasNumber.length === 9 && /^\d+$/.test(hasNumber))
+          return true
 
         return false
       },
       {
         message:
-          'Se preencher o RG, ambos número (9 dígitos) e data de expedição são obrigatórios.',
+          'Se preencher o RG, ambos número (9 dígitos numéricos) e data de expedição são obrigatórios.',
         path: ['number'],
       },
     ),
@@ -72,18 +76,16 @@ const formSchema = z.object({
         const hasNumber = data?.number?.trim()
         const hasDate = data?.expeditionDate?.trim()
 
-        // Se ambos estão vazios, é válido
         if (!hasNumber && !hasDate) return true
 
-        // Se ambos estão preenchidos e o número tem 8 dígitos, é válido
-        if (hasNumber && hasDate && hasNumber.length === 8) return true
+        if (hasNumber && hasDate && hasNumber.length === 8 && /^\d+$/.test(hasNumber))
+          return true
 
-        // Qualquer outra situação é inválida
         return false
       },
       {
         message:
-          'Se preencher o passaporte, ambos número (8 dígitos) e data de expedição são obrigatórios.',
+          'Se preencher o passaporte, ambos número (8 dígitos numéricos) e data de expedição são obrigatórios.',
         path: ['number'],
       },
     ),

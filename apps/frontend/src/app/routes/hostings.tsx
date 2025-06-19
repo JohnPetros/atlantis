@@ -1,17 +1,16 @@
-import { Hosting } from '@atlantis/core/entities'
-import {
-  accommodationsRepository,
-  customersRepository,
-  hostingsRepository,
-} from '@/database/repositories'
+import type { Route } from './+types/hostings'
+
 import { ActionContextProvider } from '@/ui/contexts/action-context'
-import type { Route } from './+types/customers'
 import { HostingsPage } from '@/ui/pages/hostings'
+import { hostingsService } from '@/services'
+
+import { customersService } from '@/services'
+import { accommodationsService } from '@/services'
 
 export const clientLoader = async () => {
-  const hostings = await hostingsRepository.findAll()
-  const customers = await customersRepository.findAll()
-  const accommodations = await accommodationsRepository.findAll()
+  const hostings = await hostingsService.getAllHostings()
+  const customers = await customersService.getAllCustomers()
+  const accommodations = await accommodationsService.getAllAccommodations()
   return { hostings, customers, accommodations }
 }
 
@@ -19,45 +18,31 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const action = await request.json()
 
   if (action.name === 'create-hosting') {
-    const host = await customersRepository.findById(action.payload.hostId)
-    const accommodation = await accommodationsRepository.findById(
+    const response = await hostingsService.createHosting(
       action.payload.accomodationId,
+      action.payload.hostId,
     )
-    if (host && accommodation) {
-      const hosting = Hosting.create({
-        accomodationId: action.payload.accomodationId,
-        accomodationName: accommodation.name,
-        hostId: action.payload.hostId,
-        hostName: host.name,
-        hostDocuments: host.documents.map((document) => document),
-        hostDependentsCount: host.dependents.length,
-      })
-      await hostingsRepository.add(hosting.dto)
+    if (!response.ok) {
+      return { error: await response.json() }
     }
   }
 
   if (action.name === 'update-hosting') {
-    const host = await customersRepository.findById(action.payload.hostId)
-    const accommodation = await accommodationsRepository.findById(
+    const response = await hostingsService.updateHosting(
+      action.payload.hostingId,
       action.payload.accomodationId,
+      action.payload.hostId,
     )
-    console.log(action.payload)
-    if (host && accommodation) {
-      const hosting = Hosting.create({
-        id: action.payload.hostingId,
-        accomodationId: action.payload.accomodationId,
-        accomodationName: accommodation.name,
-        hostId: action.payload.hostId,
-        hostName: host.name,
-        hostDocuments: host.documents.map((document) => document),
-        hostDependentsCount: host.dependents.length,
-      })
-      await hostingsRepository.update(hosting.dto)
+    if (!response.ok) {
+      return { error: await response.json() }
     }
   }
 
   if (action.name === 'delete-hosting') {
-    await hostingsRepository.remove(action.payload.hostingId)
+    const response = await hostingsService.deleteHosting(action.payload.hostingId)
+    if (!response.ok) {
+      return { error: await response.json() }
+    }
   }
 }
 

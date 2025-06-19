@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router'
 import { H1 } from '@/ui/components/h1'
 import { HostingsTable } from './hostings-tale'
-import type { clientLoader } from '~/routes/hostings'
+import type { clientLoader } from '@/app/routes/hostings'
 import { useHostingsPage } from './use-hostings-page'
 
 export const HostingsPageView = () => {

@@ -7,11 +7,16 @@ import { Switch } from '@/ui/components/switch'
 import { useAccommodationForm } from './use-accommodation-form'
 
 type Props = {
+  isLoading?: boolean
   accommodation?: AccommodationDto
   onSubmit: (accommodation: AccommodationDto) => Promise<void>
 }
 
-export const AccommodationFormView = ({ accommodation, onSubmit }: Props) => {
+export const AccommodationFormView = ({
+  isLoading = false,
+  accommodation,
+  onSubmit,
+}: Props) => {
   const { form, handleSubmit } = useAccommodationForm(onSubmit, accommodation)
 
   return (
@@ -105,7 +110,7 @@ export const AccommodationFormView = ({ accommodation, onSubmit }: Props) => {
           />
         </Form.Group>
 
-        <Button type='submit' size='lg' className='mt-6 self-end'>
+        <Button type='submit' size='lg' className='mt-6 self-end' isLoading={isLoading}>
           Salvar
         </Button>
       </form>

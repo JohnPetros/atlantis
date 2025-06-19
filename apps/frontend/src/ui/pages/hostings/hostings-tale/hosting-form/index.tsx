@@ -1,8 +1,8 @@
 import { useLoaderData } from 'react-router'
 
-import type { HostingDto } from 'core/dtos'
 import { HostingFormView } from './hosting-form-view'
-import type { clientLoader } from '~/routes/hostings'
+import type { clientLoader } from '@/app/routes/hostings'
+import { useActionContext } from '@/ui/hooks/use-action-context'
 
 type Props = {
   hostingId?: string
@@ -10,6 +10,7 @@ type Props = {
 }
 
 export const HostingForm = ({ hostingId, onSubmit }: Props) => {
+  const { isExecuting } = useActionContext()
   const data = useLoaderData<typeof clientLoader>()
   const hosting = data.hostings.find((hosting) => hosting.id === hostingId)
 
@@ -18,6 +19,7 @@ export const HostingForm = ({ hostingId, onSubmit }: Props) => {
       hosting={hosting}
       customers={data.customers}
       accommodations={data.accommodations}
+      isLoading={isExecuting}
       onSubmit={onSubmit}
     />
   )

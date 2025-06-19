@@ -1,3 +1,5 @@
+import { prisma } from '../prisma'
+
 import {
   PlusFamilyDirector,
   PlusSingleDirector,
@@ -8,7 +10,6 @@ import {
 } from '@atlantis/core/directors'
 import type { AccommodationDto } from '@atlantis/core/dtos'
 import { Accommodation } from '@atlantis/core/entities'
-import { prisma } from '../prisma.js'
 
 export class AccommodationsRepository {
   constructor() {
@@ -30,6 +31,13 @@ export class AccommodationsRepository {
     })
 
     return accommodation ? this.mapToDto(accommodation) : null
+  }
+
+  async hasName(name: string): Promise<boolean> {
+    const accommodationExists = await prisma.accommodation.findFirst({
+      where: { name },
+    })
+    return Boolean(accommodationExists)
   }
 
   async add(accommodationDto: AccommodationDto): Promise<void> {
@@ -92,7 +100,7 @@ export class AccommodationsRepository {
   private mapToDto(accommodation: any): AccommodationDto {
     return {
       id: accommodation.id,
-      name: accommodation.accommodationName,
+      name: accommodation.name,
       singleBeds: accommodation.singleBeds,
       coupleBeds: accommodation.coupleBeds,
       suites: accommodation.suites,

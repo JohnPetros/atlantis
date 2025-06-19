@@ -169,6 +169,12 @@ export class Customer extends Entity<CustomerProps> {
     )
   }
 
+  hasDocument(document: Document): boolean {
+    return this.props.documents.some((currentDocument) =>
+      currentDocument.isEqualTo(document),
+    )
+  }
+
   hasCpf(): boolean {
     return this.props.documents.some((document) => document.type === DocumentType.CPF)
   }

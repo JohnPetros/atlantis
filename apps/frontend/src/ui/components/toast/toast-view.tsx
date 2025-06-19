@@ -1,0 +1,22 @@
+import { useTheme } from 'next-themes'
+import { Toaster, type ToasterProps } from 'sonner'
+
+export const ToastView = ({ ...props }: ToasterProps) => {
+  const { theme = 'system' } = useTheme()
+
+  return (
+    <Toaster
+      theme={theme as ToasterProps['theme']}
+      position='top-center'
+      className='toaster group'
+      style={
+        {
+          '--normal-bg': 'var(--popover)',
+          '--normal-text': 'var(--popover-foreground)',
+          '--normal-border': 'var(--border)',
+        } as React.CSSProperties
+      }
+      {...props}
+    />
+  )
+}

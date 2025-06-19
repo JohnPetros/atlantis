@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import type { HostingDto } from 'core/dtos'
+import type { HostingDto } from '@atlantis/core/dtos'
 
 const formSchema = z.object({
   accomodationId: z.string({ required_error: 'Acomodação é obrigatório.' }),

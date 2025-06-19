@@ -26,6 +26,7 @@ type AccommodationsTableData = {
 }
 
 type Props = {
+  isLoading?: boolean
   accommodations: AccommodationDto[]
   onDeleteAccommodation: (accommodationId: string) => Promise<void>
   onCreateAccommodation: (accommodation: AccommodationDto) => Promise<void>
@@ -33,12 +34,61 @@ type Props = {
 }
 
 export const AccommodationsTableView = ({
+  isLoading = false,
   accommodations,
   onDeleteAccommodation,
   onCreateAccommodation,
   onUpdateAccommodation,
 }: Props) => {
   const columns: ColumnDef<AccommodationsTableData>[] = [
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => {
+        return (
+          <DropdownMenu.Container>
+            <DropdownMenu.Trigger asChild>
+              <Button variant='ghost' className='h-8 w-8 p-0'>
+                <span className='sr-only'>Abrir menu de ações</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content className='flex flex-col'>
+              <DropdownMenu.Label>Ações</DropdownMenu.Label>
+              <DropdownMenu.Item asChild>
+                <FormDialog
+                  title='Editar acomodação'
+                  trigger={
+                    <Button type='button' variant='ghost' className='justify-start'>
+                      <PencilIcon className='h-3 w-3' />
+                      Editar acomodação
+                    </Button>
+                  }
+                >
+                  <AccommodationForm
+                    accommodationId={row.original.id}
+                    onSubmit={onUpdateAccommodation}
+                  />
+                </FormDialog>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item asChild>
+                <AlertMessageDialog
+                  onConfirm={() => onDeleteAccommodation(row.original.id)}
+                  trigger={
+                    <Button variant='ghost' className='justify-start'>
+                      <TrashIcon className='h-4 w-4' />
+                      Excluir acomodação
+                    </Button>
+                  }
+                >
+                  Tem certeza que deseja excluir a acomodação?
+                </AlertMessageDialog>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Container>
+        )
+      },
+    },
     {
       accessorKey: 'name',
       header: ({ column }) => {
@@ -147,54 +197,6 @@ export const AccommodationsTableView = ({
         return <div>{row.original.hasAirConditioning ? 'Sim' : 'Não'}</div>
       },
     },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => {
-        return (
-          <DropdownMenu.Container>
-            <DropdownMenu.Trigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Abrir menu de ações</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content className='flex flex-col'>
-              <DropdownMenu.Label>Ações</DropdownMenu.Label>
-              <DropdownMenu.Item asChild>
-                <FormDialog
-                  title='Editar acomodação'
-                  trigger={
-                    <Button type='button' variant='ghost' className='justify-start'>
-                      <PencilIcon className='h-3 w-3' />
-                      Editar acomodação
-                    </Button>
-                  }
-                >
-                  <AccommodationForm
-                    accommodationId={row.original.id}
-                    onSubmit={onUpdateAccommodation}
-                  />
-                </FormDialog>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item asChild>
-                <AlertMessageDialog
-                  onConfirm={() => onDeleteAccommodation(row.original.id)}
-                  trigger={
-                    <Button variant='ghost' className='justify-start'>
-                      <TrashIcon className='h-4 w-4' />
-                      Excluir acomodação
-                    </Button>
-                  }
-                >
-                  Tem certeza que deseja excluir a acomodação?
-                </AlertMessageDialog>
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Container>
-        )
-      },
-    },
   ]
 
   return (
@@ -213,6 +215,7 @@ export const AccommodationsTableView = ({
         </FormDialog>
       }
       columns={columns}
+      isLoading={isLoading}
       data={accommodations.map((accommodation) => ({
         id: accommodation.id,
         name: accommodation.name,

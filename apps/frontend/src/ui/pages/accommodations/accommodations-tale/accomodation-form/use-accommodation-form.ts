@@ -5,22 +5,26 @@ import { z } from 'zod'
 import type { AccommodationDto } from '@atlantis/core/dtos'
 
 const formSchema = z.object({
-  name: z.string().min(0, {
-    message: 'Nome é obrigatório.',
+  name: z.string({ required_error: 'Nome é obrigatório.' }),
+  singleBeds: z.coerce
+    .number({ invalid_type_error: 'Camas de solteiro é obrigatório.' })
+    .min(0, {
+      message: 'Não pode ser negativo.',
+    }),
+  coupleBeds: z.coerce
+    .number({ invalid_type_error: 'Camas de casal é obrigatório.' })
+    .min(0, {
+      message: 'Não pode ser negativo.',
+    }),
+  suites: z.coerce.number({ invalid_type_error: 'Suites é obrigatório.' }).min(0, {
+    message: 'Não pode ser negativo.',
   }),
-  singleBeds: z.coerce.number().min(0, {
-    message: 'Camas de solteiro é obrigatório.',
+  garages: z.coerce.number({ invalid_type_error: 'Garagens é obrigatório.' }).min(0, {
+    message: 'Não pode ser negativo.',
   }),
-  coupleBeds: z.coerce.number().min(0, {
-    message: 'Camas de casal é obrigatório.',
+  hasAirConditioning: z.coerce.boolean({
+    invalid_type_error: 'Ar-condicionado é obrigatório.',
   }),
-  suites: z.coerce.number().min(0, {
-    message: 'Suites é obrigatório.',
-  }),
-  garages: z.coerce.number().min(0, {
-    message: 'Garagens é obrigatório.',
-  }),
-  hasAirConditioning: z.coerce.boolean(),
 })
 
 type FormData = z.infer<typeof formSchema>
