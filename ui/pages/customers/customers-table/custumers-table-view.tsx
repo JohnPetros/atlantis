@@ -51,6 +51,64 @@ export const CustomersTableView = ({
 }: Props) => {
   const columns: ColumnDef<CustomersTableData>[] = [
     {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => {
+        return (
+          <DropdownMenu.Container>
+            <DropdownMenu.Trigger asChild>
+              <Button variant='ghost' className='h-8 w-8 p-0'>
+                <span className='sr-only'>Abrir menu de ações</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content className='flex flex-col'>
+              <DropdownMenu.Label>Ações</DropdownMenu.Label>
+              <DropdownMenu.Item asChild>
+                <FormDialog
+                  title={hasDependents ? 'Editar cliente' : 'Editar dependente'}
+                  trigger={
+                    <Button type='button' variant='ghost' className='justify-start'>
+                      <PencilIcon className='h-3 w-3' />
+                      {hasDependents ? 'Editar cliente' : 'Editar dependente'}
+                    </Button>
+                  }
+                >
+                  <CustomerForm
+                    customerId={row.original.id}
+                    isDependent={!hasDependents}
+                    onSubmit={onUpdateCustomer}
+                  />
+                </FormDialog>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item asChild>
+                <AlertMessageDialog
+                  onConfirm={() => onDeleteCustomer(row.original.id)}
+                  trigger={
+                    <Button variant='ghost' className='justify-start'>
+                      <TrashIcon className='h-4 w-4' />
+                      Excluir {hasDependents ? 'cliente' : 'dependente'}
+                    </Button>
+                  }
+                >
+                  Tem certeza que deseja excluir o{' '}
+                  {hasDependents ? 'cliente' : 'dependente'}?
+                </AlertMessageDialog>
+              </DropdownMenu.Item>
+              {hasDependents && (
+                <DropdownMenu.Item asChild>
+                  <DependentsDialog
+                    customerId={row.original.id}
+                    dependents={row.original.dependents}
+                  />
+                </DropdownMenu.Item>
+              )}
+            </DropdownMenu.Content>
+          </DropdownMenu.Container>
+        )
+      },
+    },
+    {
       accessorKey: 'name',
       header: ({ column }) => {
         return (
@@ -174,64 +232,6 @@ export const CustomersTableView = ({
       },
       cell: ({ row }) => {
         return <div>{row.original.address}</div>
-      },
-    },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => {
-        return (
-          <DropdownMenu.Container>
-            <DropdownMenu.Trigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Abrir menu de ações</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content className='flex flex-col'>
-              <DropdownMenu.Label>Ações</DropdownMenu.Label>
-              <DropdownMenu.Item asChild>
-                <FormDialog
-                  title={hasDependents ? 'Editar cliente' : 'Editar dependente'}
-                  trigger={
-                    <Button type='button' variant='ghost' className='justify-start'>
-                      <PencilIcon className='h-3 w-3' />
-                      {hasDependents ? 'Editar cliente' : 'Editar dependente'}
-                    </Button>
-                  }
-                >
-                  <CustomerForm
-                    customerId={row.original.id}
-                    isDependent={!hasDependents}
-                    onSubmit={onUpdateCustomer}
-                  />
-                </FormDialog>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item asChild>
-                <AlertMessageDialog
-                  onConfirm={() => onDeleteCustomer(row.original.id)}
-                  trigger={
-                    <Button variant='ghost' className='justify-start'>
-                      <TrashIcon className='h-4 w-4' />
-                      Excluir {hasDependents ? 'cliente' : 'dependente'}
-                    </Button>
-                  }
-                >
-                  Tem certeza que deseja excluir o{' '}
-                  {hasDependents ? 'cliente' : 'dependente'}?
-                </AlertMessageDialog>
-              </DropdownMenu.Item>
-              {hasDependents && (
-                <DropdownMenu.Item asChild>
-                  <DependentsDialog
-                    customerId={row.original.id}
-                    dependents={row.original.dependents}
-                  />
-                </DropdownMenu.Item>
-              )}
-            </DropdownMenu.Content>
-          </DropdownMenu.Container>
-        )
       },
     },
   ]
