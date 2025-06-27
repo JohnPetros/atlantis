@@ -1,6 +1,7 @@
 import { Command } from './Command'
 import { Storage } from '@/utils/Storage'
 import type { Hosting } from '@/entities/Hosting'
+import { DateFormatter } from '@/formatters'
 
 export class ListHostingsCommand extends Command {
   private hostings: Hosting[]
@@ -19,6 +20,8 @@ export class ListHostingsCommand extends Command {
       this.hostings.map((hosting) => ({
         ID: hosting.id,
         Acomodação: hosting.accomodationName,
+        'Data de início': DateFormatter.format(hosting.startDate),
+        'Data de término': DateFormatter.format(hosting.endDate),
         'ID do cliente': hosting.hostId,
         'Nome do cliente': hosting.hostName,
         'Documentos do cliente': hosting.hostDocuments

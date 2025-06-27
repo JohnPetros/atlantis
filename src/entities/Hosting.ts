@@ -8,6 +8,8 @@ type HostingProps = {
   hostName: string
   hostDocuments: Document[]
   hostDependents: number
+  startDate: Date
+  endDate: Date
 }
 
 export class Hosting extends Entity<HostingProps> {
@@ -29,5 +31,13 @@ export class Hosting extends Entity<HostingProps> {
 
   get hostDependents(): number {
     return this.props.hostDependents
+  }
+
+  get startDate(): Date {
+    return this.props.startDate
+  }
+
+   get endDate(): Date {
+    return this.props.endDate
   }
 }

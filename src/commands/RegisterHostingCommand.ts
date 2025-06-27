@@ -13,12 +13,24 @@ export class RegisterHostingCommand extends Command {
     }
     const accomodation = await this.selectAccomodation()
 
+     const startDate = await this.input.date(
+        'Data de início',
+        this.output,
+      )
+
+      const endDate = await this.input.date(
+        'Data de término',
+        this.output,
+      )
+
     const hosting = new Hosting({
       accommodationName: accomodation.accomodationName,
       hostId: customer.id,
       hostName: customer.name,
       hostDocuments: customer.documents,
       hostDependents: customer.dependents.length,
+      startDate,
+      endDate
     })
     customer.isHosted = true
 
