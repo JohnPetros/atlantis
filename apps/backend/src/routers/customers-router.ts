@@ -65,16 +65,6 @@ customersRouter.put('/:id', async (c) => {
       return c.json({ message: 'Cliente não encontrado' }, 404)
     }
 
-    for (const document of customerData.documents) {
-      const customer = Customer.create(customerDto)
-      if (!customer.hasDocument(Document.create(document))) {
-        const hasDuplicateDocument = await customersRepository.hasDocument(document)
-        if (hasDuplicateDocument) {
-          return c.json({ message: `${document.type} já cadastrado` }, 409)
-        }
-      }
-    }
-
     customerData.id = id
 
     await customersRepository.update(customerData)

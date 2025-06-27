@@ -13,9 +13,6 @@ type Pages = {
   "/": {
     params: {};
   };
-  "/customers": {
-    params: {};
-  };
   "/accommodations": {
     params: {};
   };
@@ -27,19 +24,15 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/customers" | "/accommodations" | "/hostings";
+    page: "/" | "/accommodations" | "/hostings";
   };
   "layout.tsx": {
     id: "layout";
-    page: "/" | "/customers" | "/accommodations" | "/hostings";
-  };
-  "routes/index.tsx": {
-    id: "routes/index";
-    page: "/";
+    page: "/" | "/accommodations" | "/hostings";
   };
   "routes/customers.tsx": {
     id: "routes/customers";
-    page: "/customers";
+    page: "/";
   };
   "routes/accommodations.tsx": {
     id: "routes/accommodations";

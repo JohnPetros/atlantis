@@ -58,7 +58,7 @@ hostingsRouter.put('/:id', async (c) => {
       hostingData.accomodationId,
     )
     if (hasHosting) {
-      return c.json({ message: 'Acomodação já hospedada' }, 409)
+      return c.json({ message: 'Cliente já hospedado' }, 409)
     }
 
     hostingData.id = id

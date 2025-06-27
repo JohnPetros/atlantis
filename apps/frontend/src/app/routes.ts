@@ -4,8 +4,7 @@ import { ROUTES } from '../constants/routes'
 
 export default [
   layout('layout.tsx', [
-    index('routes/index.tsx'),
-    route(ROUTES.customers, 'routes/customers.tsx'),
+    index('routes/customers.tsx'),
     route(ROUTES.accommodations, 'routes/accommodations.tsx'),
     route(ROUTES.hostings, 'routes/hostings.tsx'),
   ]),
