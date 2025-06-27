@@ -36,9 +36,7 @@ hostingsRouter.post('/', async (c) => {
   try {
     const hostingData: HostingDto = await c.req.json()
 
-    const hasHosting = await hostingsRepository.findByAccommodationId(
-      hostingData.accomodationId,
-    )
+    const hasHosting = await hostingsRepository.findByHostId(hostingData.hostId)
     if (hasHosting) {
       return c.json({ message: 'Acomodação já hospedada' }, 409)
     }

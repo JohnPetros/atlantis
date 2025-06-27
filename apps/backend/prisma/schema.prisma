@@ -27,7 +27,7 @@ model Customer {
   documents  Document[]
   address    Address?
   dependents Customer[]  @relation("CustomerDependents")
-  parent     Customer?   @relation("CustomerDependents", fields: [parentId], references: [id])
+  parent     Customer?   @relation("CustomerDependents", fields: [parentId], references: [id], onDelete: Cascade)
   parentId   String?
 
   hostings Hosting[]
@@ -94,8 +94,8 @@ model Hosting {
   hostId          String
   createdAt       DateTime @default(now())
 
-  accommodation Accommodation @relation(fields: [accommodationId], references: [id])
-  host          Customer      @relation(fields: [hostId], references: [id])
+  accommodation Accommodation @relation(fields: [accommodationId], references: [id], onDelete: Cascade)
+  host          Customer      @relation(fields: [hostId], references: [id], onDelete: Cascade)
 
   @@map("hostings")
 }

@@ -60,6 +60,24 @@ export class HostingsRepository {
     return hosting ? this.mapToDto(hosting) : null
   }
 
+  async findByHostId(hostId: string): Promise<HostingDto | null> {
+    const hosting = await prisma.hosting.findFirst({
+      where: { hostId },
+      include: {
+        accommodation: true,
+        host: {
+          include: {
+            address: true,
+            cellphones: true,
+            documents: true,
+            dependents: true,
+          },
+        },
+      },
+    })
+    return hosting ? this.mapToDto(hosting) : null
+  }
+
   async add(hostingDto: HostingDto): Promise<void> {
     await prisma.hosting.create({
       data: {
