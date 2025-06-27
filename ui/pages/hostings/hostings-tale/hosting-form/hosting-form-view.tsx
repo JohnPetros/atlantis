@@ -3,6 +3,7 @@ import { Form } from 'ui/components/form'
 import { Button } from 'ui/components/button'
 import { Select } from 'ui/components/select'
 import { useHostingForm } from './use-hosting-form'
+import { DocumentType } from 'core/enums/DocumentType'
 
 type Props = {
   hosting?: HostingDto
@@ -65,7 +66,12 @@ export const HostingFormView = ({
                     <Select.Content>
                       {customers?.map((customer) => (
                         <Select.Item key={customer.id} value={String(customer.id)}>
-                          {customer.name}
+                          {customer.name} | CPF:{' '}
+                          {
+                            customer.documents.find(
+                              (document) => document.type === DocumentType.CPF,
+                            )?.number
+                          }
                         </Select.Item>
                       ))}
                     </Select.Content>

@@ -1,7 +1,7 @@
 import type { CustomerDto } from 'core/dtos'
 import { Button } from 'ui/components/button'
 import { Dialog } from 'ui/components/dialog'
-import { CustomersTable } from '../customers-tale'
+import { CustomersTable } from '../customers-table'
 import { User } from 'lucide-react'
 
 type Props = {

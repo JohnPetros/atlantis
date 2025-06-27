@@ -1,5 +1,5 @@
 import { H1 } from 'ui/components/h1'
-import { CustomersTable } from './customers-tale'
+import { CustomersTable } from './customers-table'
 import { useLoaderData } from 'react-router'
 import type { clientLoader } from '~/routes/customers'
 import { useCustomersPage } from './use-customers-page'
