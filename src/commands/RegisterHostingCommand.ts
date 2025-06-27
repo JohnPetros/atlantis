@@ -7,6 +7,10 @@ import { Storage } from '@/utils/Storage'
 export class RegisterHostingCommand extends Command {
   async execute() {
     const customer = await this.selectCustomer()
+    if (customer.isHosted) {
+      this.output.error('Cliente já está hospedado')
+      return
+    }
     const accomodation = await this.selectAccomodation()
 
     const hosting = new Hosting({
