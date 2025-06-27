@@ -1,6 +1,7 @@
 import { CustomerRegisteringTypeMenu } from '@/menus/CustomerRegisteringTypeMenu'
 import { Command } from './Command'
 import { RegisterHolderCommand } from './RegisterHolderCommand'
+import { RegisterDependentCommand } from './RegisterDependentCommand'
 
 export class HandleCustomerRegisteringCommand extends Command {
   constructor() {
@@ -17,6 +18,7 @@ export class HandleCustomerRegisteringCommand extends Command {
         break
       }
       case 'dependent': {
+        this.subcommand = new RegisterDependentCommand()
         break
       }
       case 'back':

@@ -6,7 +6,7 @@ import { RegisterAddressCommand } from './RegisterAddressCommand'
 import { SelectCustomerCommand } from './SelectCustomerCommand'
 import { RegisterCellphonesCommand } from './RegisterCellphoneCommand'
 
-export class RegisterHolderCommand extends Command {
+export class RegisterDependentCommand extends Command {
   async execute() {
     const subcommand = new SelectCustomerCommand(
       Storage.getInstance().customers,
@@ -32,12 +32,6 @@ export class RegisterHolderCommand extends Command {
     })
 
     this.subcommand = new RegisterDocumentsCommand(dependent)
-    await this.subcommand.execute()
-
-    this.subcommand = new RegisterAddressCommand(dependent)
-    await this.subcommand.execute()
-
-    this.subcommand = new RegisterCellphonesCommand(dependent)
     await this.subcommand.execute()
 
     holder.addDependent(dependent)
