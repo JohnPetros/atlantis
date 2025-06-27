@@ -14,7 +14,7 @@ import { DropdownMenu } from 'ui/components/dropdown-menu'
 import { FormDialog } from 'ui/components/form-dialog'
 import { AlertMessageDialog } from 'ui/components/alert-message-dialog'
 import { HostingForm } from './hosting-form'
-import { DocumentFormatter } from 'core/formatters'
+import { DateFormatter, DocumentFormatter } from 'core/formatters'
 
 type HostingsTableData = {
   id: string
@@ -22,13 +22,17 @@ type HostingsTableData = {
   hostName: string
   hostDocuments: string
   hostDependentsCount: number
+  startDate: string
+  endDate: string
 }
 
 type Props = {
   hostings: HostingDto[]
   onDeleteHosting: (hostingId: string) => Promise<void>
-  onCreateHosting: (hostId: string, accomodationId: string) => Promise<void>
-  onUpdateHosting: (hostId: string, accomodationId: string) => Promise<void>
+  onCreateHosting: (hostId: string, accomodationId: string,   startDate: Date,
+    endDate: Date,) => Promise<void>
+  onUpdateHosting: (hostId: string, accomodationId: string,   startDate: Date,
+    endDate: Date) => Promise<void>
 }
 
 export const HostingsTableView = ({
@@ -53,7 +57,43 @@ export const HostingsTableView = ({
         )
       },
       cell: ({ row }) => {
-        return <div>{row.original.accommodationName}</div>
+        return <div>{DateFormatter.format(row.original.accommodationName)}</div>
+      },
+    },
+    {
+      accessorKey: 'startDate',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Data de início
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return <div>{row.original.startDate}</div>
+      },
+    },
+     {
+      accessorKey: 'endDate',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Data de término
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return <div>{row.original.endDate}</div>
       },
     },
     {
@@ -176,6 +216,8 @@ export const HostingsTableView = ({
       data={hostings.map((hosting) => ({
         id: hosting.id,
         accommodationName: hosting.accomodationName,
+        startDate:hosting.startDate, 
+        endDate:hosting.endDate, 
         hostName: hosting.hostName,
         hostDocuments: hosting.hostDocuments
           .map((document) => DocumentFormatter.format(document.type, document.number))

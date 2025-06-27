@@ -1,7 +1,6 @@
 import { useLoaderData } from 'react-router'
 import { H1 } from 'ui/components/h1'
-import { useCustomersPage } from '../customers/use-customers-page'
-import { AccommodationsTable } from './accommodations-tale'
+import { AccommodationsTable } from './accommodations-table'
 import type { clientLoader } from '~/routes/accommodations'
 import { useAccommodationsPage } from './use-accommodations-page'
 

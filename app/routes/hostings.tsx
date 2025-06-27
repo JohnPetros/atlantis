@@ -24,6 +24,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
       action.payload.accomodationId,
     )
     if (host && accommodation) {
+      console.log({  startDate: action.payload.startDate,
+        endDate: action.payload.endDate,})
       const hosting = Hosting.create({
         accomodationId: action.payload.accomodationId,
         accomodationName: accommodation.name,
@@ -31,6 +33,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
         hostName: host.name,
         hostDocuments: host.documents.map((document) => document),
         hostDependentsCount: host.dependents.length,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
       })
       await hostingsRepository.add(hosting.dto)
     }
@@ -41,7 +45,6 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
     const accommodation = await accommodationsRepository.findById(
       action.payload.accomodationId,
     )
-    console.log(action.payload)
     if (host && accommodation) {
       const hosting = Hosting.create({
         id: action.payload.hostingId,
@@ -51,6 +54,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
         hostName: host.name,
         hostDocuments: host.documents.map((document) => document),
         hostDependentsCount: host.dependents.length,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
       })
       await hostingsRepository.update(hosting.dto)
     }

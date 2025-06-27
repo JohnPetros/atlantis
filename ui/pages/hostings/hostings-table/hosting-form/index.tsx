@@ -6,7 +6,8 @@ import type { clientLoader } from '~/routes/hostings'
 
 type Props = {
   hostingId?: string
-  onSubmit: (hostId: string, accomodationId: string) => Promise<void>
+  onSubmit: (hostId: string,  accomodationId: string, startDate: Date,
+    endDate: Date) => Promise<void>
 }
 
 export const HostingForm = ({ hostingId, onSubmit }: Props) => {
