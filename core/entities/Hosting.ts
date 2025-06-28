@@ -25,7 +25,7 @@ export class Hosting extends Entity<HostingProps> {
         hostDocuments: dto.hostDocuments.map(Document.create),
         hostDependentsCount: dto.hostDependentsCount,
         startDate: new Date(dto.startDate),
-        endDate: new Date(dto.endDate)
+        endDate: new Date(dto.endDate),
       },
       dto.id,
     )
@@ -55,11 +55,11 @@ export class Hosting extends Entity<HostingProps> {
     return this.props.hostDependentsCount
   }
 
-   get startDate(): Date {
+  get startDate(): Date {
     return this.props.startDate
   }
 
-   get endDate(): Date {
+  get endDate(): Date {
     return this.props.endDate
   }
 

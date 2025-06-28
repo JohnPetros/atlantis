@@ -5,10 +5,10 @@ import {
   SimpleSingleDirector,
 } from 'core/directors'
 import { SuperFamilyDirector } from 'core/directors/SuperFamilyDirector'
-import type { AccommodationDto } from 'core/dtos'
+import type { AccommodationDto, HostingDto } from 'core/dtos'
 
 export const AccommodationsRepository = () => {
-  let accommodations: AccommodationDto[] = []
+  const accommodations: AccommodationDto[] = []
   accommodations.push(new SuperFamilyDirector().build().dto)
   accommodations.push(new SimpleSingleDirector().build().dto)
   accommodations.push(new PlusSingleDirector().build().dto)
@@ -16,27 +16,29 @@ export const AccommodationsRepository = () => {
   accommodations.push(new PlusFamilyDirector().build().dto)
 
   return {
-    async findAll() {
-      return accommodations
+    async findAll(hostings: HostingDto[]) {
+      return accommodations.map((accommodation) => {
+        const hostingsCount = hostings.filter(
+          (hosting) => hosting.accomodationId === accommodation.id,
+        ).length
+
+        return {
+          ...accommodation,
+          hostingsCount,
+        }
+      })
     },
 
     async findById(id: string) {
-      return accommodations.find((accommodation) => accommodation.id === id)
-    },
-
-    async add(accommodation: AccommodationDto) {
-      accommodations.unshift(accommodation)
-    },
-
-    async update(accommodation: AccommodationDto) {
-      const index = accommodations.findIndex(
-        (currentAccommodation) => currentAccommodation.id === accommodation.id,
+      const accommodation = accommodations.find(
+        (accommodation) => accommodation.id === id,
       )
-      accommodations[index] = accommodation
-    },
+      if (!accommodation) return null
 
-    async remove(id: string) {
-      accommodations = accommodations.filter((accommodation) => accommodation.id !== id)
+      return {
+        ...accommodation,
+        hostingsCount: 0,
+      }
     },
   }
 }

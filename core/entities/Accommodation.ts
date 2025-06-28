@@ -8,6 +8,8 @@ export type AccommodationProps = {
   suites: number
   garages: number
   hasAirConditioning: boolean
+  hostingsCount: number
+  maxHostingsCount: number
 }
 
 export class Accommodation extends Entity<AccommodationProps> {
@@ -19,6 +21,8 @@ export class Accommodation extends Entity<AccommodationProps> {
         coupleBeds: dto.coupleBeds,
         suites: dto.suites,
         garages: dto.garages,
+        hostingsCount: dto.hostingsCount,
+        maxHostingsCount: dto.maxHostingsCount,
         hasAirConditioning: dto.hasAirConditioning,
       },
       dto.id,
@@ -49,6 +53,14 @@ export class Accommodation extends Entity<AccommodationProps> {
     return this.props.garages
   }
 
+  get hostingsCount(): number {
+    return this.props.hostingsCount
+  }
+
+  get maxHostingsCount(): number {
+    return this.props.maxHostingsCount
+  }
+
   get dto(): AccommodationDto {
     return {
       id: this.id,
@@ -58,6 +70,8 @@ export class Accommodation extends Entity<AccommodationProps> {
       suites: this.suites,
       garages: this.garages,
       hasAirConditioning: this.hasAirConditioning,
+      hostingsCount: this.hostingsCount,
+      maxHostingsCount: this.maxHostingsCount,
     }
   }
 }

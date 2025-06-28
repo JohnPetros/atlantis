@@ -4,9 +4,14 @@ export class DateFormatter {
   }
 
   static formatDate(date: Date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}/${month}/${year}`
+  }
+
+  static formatDateIsoString(date: string) {
+    const [day, month, year] = date.split('/')
+    return `${year}-${month}-${day}`
   }
 }

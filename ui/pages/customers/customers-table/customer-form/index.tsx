@@ -13,7 +13,6 @@ export const CustomerForm = ({ customerId, isDependent, onSubmit }: Props) => {
   const data = useLoaderData<typeof clientLoader>()
   let customer: CustomerDto | undefined
 
-  console.log('isDependent', isDependent)
   if (isDependent) {
     const dependents = data.flatMap((customer) => customer.dependents)
     customer = dependents.find((dependent) => dependent.id === customerId)

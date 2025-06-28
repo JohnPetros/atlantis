@@ -11,7 +11,7 @@ import { HostingsPage } from 'ui/pages/hostings'
 export const clientLoader = async () => {
   const hostings = await hostingsRepository.findAll()
   const customers = await customersRepository.findAll()
-  const accommodations = await accommodationsRepository.findAll()
+  const accommodations = await accommodationsRepository.findAll(hostings)
   return { hostings, customers, accommodations }
 }
 
@@ -24,8 +24,6 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
       action.payload.accomodationId,
     )
     if (host && accommodation) {
-      console.log({  startDate: action.payload.startDate,
-        endDate: action.payload.endDate,})
       const hosting = Hosting.create({
         accomodationId: action.payload.accomodationId,
         accomodationName: accommodation.name,

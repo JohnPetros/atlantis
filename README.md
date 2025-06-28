@@ -1,87 +1,56 @@
-# Welcome to React Router!
+<h1 align="center">Atlantis 🐬</h1>
 
-A modern, production-ready template for building full-stack React applications using React Router.
+<div align="center">
+   <a href="https://github.com/JohnPetros">
+    <img alt="Made by JohnPetros" src="https://img.shields.io/badge/made%20by-JohnPetros-blueviolet">
+   </a>
+   <img alt="GitHub Language Count" src="https://img.shields.io/github/languages/count/JohnPetros/atlantis">
+   <a href="https://github.com/JohnPetros/atlantis/commits/main">
+    <img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/JohnPetros/atlantis">
+   </a>
+  </a>
+   </a>
+   <a href="https://github.com/JohnPetros/atlantis/blob/main/LICENSE.md">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/JohnPetros/atlantis">
+   </a>
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/JohnPetros/atlantis?style=social">
+</div>
+<br>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## 🖥️ Sobre o projeto
 
-## Features
+Este é um app para o gerenciamento de acomodações e hospedagens para um resort fictício chamado Atlantis. O desenvolvimento do projeto foi dividido em 5 *branchs*, cada uma contendo uma aplicação diferente que foca em praticar padrões de projeto, que são:
+- **app-1**: Padrão Prototype.
+- **app-2**: Padrão Singleton e Strategy. 
+- **app-3**: Padrão Builder. 
+- **app-4**: SPA com React.
+- **app-5**: SPA com React e Backend com NodeJs.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+---
 
-## Getting Started
+## 📖 Guia de instalação do App 4
 
-### Installation
+### Pré-requisitos
 
-Install the dependencies:
+- [Git](https://git-scm.com/)
+- [NodeJs](https://www.python.org/) pelo menos igual ou acima da versão 23.
+
+### Clone o repositório
+
+```bash
+git clone https://github.com/JohnPetros/atlantis.git
+```
+
+### Instale as dependências na raiz do projeto
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+### Execute a aplicação SPA
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
 ---
-
-Built with ❤️ using React Router.
