@@ -12,16 +12,27 @@ export class RegisterHostingCommand extends Command {
       return
     }
     const accomodation = await this.selectAccomodation()
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
 
-     const startDate = await this.input.date(
-        'Data de início',
-        this.output,
-      )
+    let startDate: Date
+    do {
+      startDate = await this.input.date('Data de início', this.output)
+      if (startDate < today) {
+        this.output.error('A data de início não pode ser anterior a hoje')
+      }
+    } while (startDate < today)
 
-      const endDate = await this.input.date(
-        'Data de término',
-        this.output,
-      )
+    let endDate: Date
+    do {
+      endDate = await this.input.date('Data de término', this.output)
+      if (endDate < today) {
+        this.output.error('A data de término não pode ser anterior a hoje')
+      }
+      if (endDate < startDate) {
+        this.output.error('A data de término não pode ser anterior à data de início')
+      }
+    } while (endDate < today || endDate < startDate)
 
     const hosting = new Hosting({
       accommodationName: accomodation.accomodationName,
@@ -30,7 +41,7 @@ export class RegisterHostingCommand extends Command {
       hostDocuments: customer.documents,
       hostDependents: customer.dependents.length,
       startDate,
-      endDate
+      endDate,
     })
     customer.isHosted = true
 
