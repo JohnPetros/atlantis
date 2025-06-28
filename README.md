@@ -17,7 +17,7 @@
 </div>
 <br>
 
-## 🖥️ Sobre o projeto
+## Sobre o projeto
 
 Este é um app multi-modal para o gerenciamento de acomodações e hospedagens para um resort fictício chamado Atlantis. O desenvolvimento do projeto foi dividido em 5 *branchs*, cada uma contendo uma aplicação diferente que foca em praticar padrões de projeto, que são:
 - **app-1**: Padrão Prototype.
@@ -28,7 +28,7 @@ Este é um app multi-modal para o gerenciamento de acomodações e hospedagens p
 
 ---
 
-## 📖 Guia de instalação do App 1
+## Guia de instalação do App 1
 
 ### Pré-requisitos
 
