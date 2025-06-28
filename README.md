@@ -41,6 +41,12 @@ Este é um app para o gerenciamento de acomodações e hospedagens para um resor
 git clone https://github.com/JohnPetros/atlantis.git
 ```
 
+### Acesse o projeto
+
+```bash
+cd /atlantis
+```
+
 ### Instale as dependências na raiz do projeto
 
 ```bash
