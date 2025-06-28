@@ -17,7 +17,7 @@
 </div>
 <br>
 
-## 🖥️ Sobre o projeto
+## Sobre o projeto
 
 Este é um app para o gerenciamento de acomodações e hospedagens para um resort fictício chamado Atlantis. O desenvolvimento do projeto foi dividido em 5 *branchs*, cada uma contendo uma aplicação diferente que foca em praticar padrões de projeto, que são:
 - **app-1**: Padrão Prototype.
@@ -28,7 +28,7 @@ Este é um app para o gerenciamento de acomodações e hospedagens para um resor
 
 ---
 
-## 📖 Guia de instalação do App 4
+## Guia de instalação do App 4
 
 ### Pré-requisitos
 
@@ -39,6 +39,12 @@ Este é um app para o gerenciamento de acomodações e hospedagens para um resor
 
 ```bash
 git clone https://github.com/JohnPetros/atlantis.git
+```
+
+### Acesse a pasta do projeto
+
+```bash
+cd /atlantis
 ```
 
 ### Instale as dependências na raiz do projeto
