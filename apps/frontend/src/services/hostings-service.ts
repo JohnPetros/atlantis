@@ -13,20 +13,31 @@ export const HostingsService = () => {
       return response.json() as Promise<HostingDto>
     },
 
-    async createHosting(accomodationId: string, hostId: string) {
+    async createHosting(
+      accomodationId: string,
+      hostId: string,
+      startDate: Date,
+      endDate: Date,
+    ) {
       return await fetch(`${BACKEND_BASE_URL}/hostings`, {
         method: 'POST',
-        body: JSON.stringify({ accomodationId, hostId }),
+        body: JSON.stringify({ accomodationId, hostId, startDate, endDate }),
         headers: {
           'Content-Type': 'application/json',
         },
       })
     },
 
-    async updateHosting(hostingId: string, accomodationId: string, hostId: string) {
+    async updateHosting(
+      hostingId: string,
+      accomodationId: string,
+      hostId: string,
+      startDate: Date,
+      endDate: Date,
+    ) {
       return await fetch(`${BACKEND_BASE_URL}/hostings/${hostingId}`, {
         method: 'PUT',
-        body: JSON.stringify({ accomodationId, hostId }),
+        body: JSON.stringify({ accomodationId, hostId, startDate, endDate }),
         headers: {
           'Content-Type': 'application/json',
         },

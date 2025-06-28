@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 
 import type { HostingDto } from '@atlantis/core/dtos'
-import { DocumentFormatter } from '@atlantis/core/formatters'
+import { DateFormatter, DocumentFormatter } from '@atlantis/core/formatters'
 
 import { DataTable } from '@/ui/components/datatable'
 import { Button } from '@/ui/components/button'
@@ -23,14 +23,27 @@ type HostingsTableData = {
   hostName: string
   hostDocuments: string
   hostDependentsCount: number
+  startDate: string
+  endDate: string
 }
 
 type Props = {
   isLoading: boolean
   hostings: HostingDto[]
   onDeleteHosting: (hostingId: string) => Promise<void>
-  onCreateHosting: (hostId: string, accomodationId: string) => Promise<void>
-  onUpdateHosting: (hostId: string, accomodationId: string) => Promise<void>
+  onCreateHosting: (
+    hostId: string,
+    accomodationId: string,
+    startDate: Date,
+    endDate: Date,
+  ) => Promise<void>
+  onUpdateHosting: (
+    hostId: string,
+    accomodationId: string,
+    startDate: Date,
+    endDate: Date,
+    hostingId?: string,
+  ) => Promise<void>
 }
 
 export const HostingsTableView = ({
@@ -102,6 +115,42 @@ export const HostingsTableView = ({
       },
       cell: ({ row }) => {
         return <div>{row.original.accommodationName}</div>
+      },
+    },
+    {
+      accessorKey: 'startDate',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Data de início
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return <div>{DateFormatter.formatDateString(row.original.startDate)}</div>
+      },
+    },
+    {
+      accessorKey: 'endDate',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Data de término
+            <ArrowUpDown className='ml-2 h-4 w-4' />
+          </Button>
+        )
+      },
+      cell: ({ row }) => {
+        return <div>{DateFormatter.formatDateString(row.original.endDate)}</div>
       },
     },
     {
@@ -185,6 +234,8 @@ export const HostingsTableView = ({
           .map((document) => DocumentFormatter.format(document.type, document.number))
           .join(' | '),
         hostDependentsCount: hosting.hostDependentsCount,
+        startDate: hosting.startDate,
+        endDate: hosting.endDate,
       }))}
     />
   )

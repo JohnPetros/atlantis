@@ -17,6 +17,7 @@ export class SimpleSingleDirector extends Director<Accommodation> {
       .setGarages(0)
       .setSuites(1)
       .setHasAirConditioning(true)
+      .setMaxHostingsCount(40)
       .build()
   }
 }

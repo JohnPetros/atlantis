@@ -83,6 +83,8 @@ export class HostingsRepository {
       data: {
         accommodationId: hostingDto.accomodationId,
         hostId: hostingDto.hostId,
+        startDate: hostingDto.startDate,
+        endDate: hostingDto.endDate,
       },
     })
   }
@@ -116,6 +118,8 @@ export class HostingsRepository {
         type: hostingDocument.type,
         expeditionDate: hostingDocument.expeditionDate.toISOString(),
       })),
+      startDate: hosting.startDate,
+      endDate: hosting.endDate,
       hostDependentsCount: hosting.host.dependents.length,
     }
   }

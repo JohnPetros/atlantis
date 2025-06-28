@@ -17,6 +17,7 @@ export class PlusSingleDirector extends Director<Accommodation> {
       .setSuites(1)
       .setGarages(1)
       .setHasAirConditioning(true)
+      .setMaxHostingsCount(35)
       .build()
   }
 }

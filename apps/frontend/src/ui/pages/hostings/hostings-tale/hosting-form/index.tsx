@@ -2,11 +2,17 @@ import { useLoaderData } from 'react-router'
 
 import { HostingFormView } from './hosting-form-view'
 import type { clientLoader } from '@/app/routes/hostings'
-import { useActionContext } from '@/ui/hooks/use-action-context'
+import { useActionContext } from '@/ui/hooks'
 
 type Props = {
   hostingId?: string
-  onSubmit: (hostId: string, accomodationId: string) => Promise<void>
+  onSubmit: (
+    hostId: string,
+    accomodationId: string,
+    startDate: Date,
+    endDate: Date,
+    hostingId?: string,
+  ) => Promise<void>
 }
 
 export const HostingForm = ({ hostingId, onSubmit }: Props) => {

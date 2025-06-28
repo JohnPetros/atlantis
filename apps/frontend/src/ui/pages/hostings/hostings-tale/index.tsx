@@ -7,8 +7,19 @@ type Props = {
   hostings: HostingDto[]
   isLoading?: boolean
   onDeleteHosting: (hostingId: string) => Promise<void>
-  onCreateHosting: (hostId: string, accomodationId: string) => Promise<void>
-  onUpdateHosting: (hostId: string, accomodationId: string) => Promise<void>
+  onCreateHosting: (
+    hostId: string,
+    accomodationId: string,
+    startDate: Date,
+    endDate: Date,
+  ) => Promise<void>
+  onUpdateHosting: (
+    hostId: string,
+    accomodationId: string,
+    startDate: Date,
+    endDate: Date,
+    hostingId?: string,
+  ) => Promise<void>
 }
 
 export const HostingsTable = (props: Props) => {

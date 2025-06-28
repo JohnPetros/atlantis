@@ -8,6 +8,7 @@ export class AccomodationBuilder implements Builder<Accommodation> {
   private suites: number
   private garages: number
   private hasAirConditioning: boolean
+  private maxHostingsCount: number
 
   constructor() {
     this.name = 'solteiro simples'
@@ -16,6 +17,7 @@ export class AccomodationBuilder implements Builder<Accommodation> {
     this.suites = 0
     this.hasAirConditioning = false
     this.garages = 0
+    this.maxHostingsCount = 0
   }
 
   setName(name: string): this {
@@ -48,6 +50,11 @@ export class AccomodationBuilder implements Builder<Accommodation> {
     return this
   }
 
+  setMaxHostingsCount(maxHostingsCount: number): this {
+    this.maxHostingsCount = maxHostingsCount
+    return this
+  }
+
   build(): Accommodation {
     const accomodation = new Accommodation({
       name: this.name,
@@ -56,6 +63,8 @@ export class AccomodationBuilder implements Builder<Accommodation> {
       suites: this.suites,
       hasAirConditioning: this.hasAirConditioning,
       garages: this.garages,
+      maxHostingsCount: this.maxHostingsCount,
+      hostingsCount: 0,
     })
     return accomodation
   }

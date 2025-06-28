@@ -12,14 +12,13 @@ import type { AccommodationDto } from '@atlantis/core/dtos'
 import { Accommodation } from '@atlantis/core/entities'
 
 export class AccommodationsRepository {
-  constructor() {
-    this.seed()
-  }
-
   async findAll(): Promise<AccommodationDto[]> {
     const accommodations = await prisma.accommodation.findMany({
       orderBy: {
         createdAt: 'asc',
+      },
+      include: {
+        hostings: true,
       },
     })
     return accommodations.map(this.mapToDto)
@@ -28,16 +27,12 @@ export class AccommodationsRepository {
   async findById(id: string): Promise<AccommodationDto | null> {
     const accommodation = await prisma.accommodation.findUnique({
       where: { id },
+      include: {
+        hostings: true,
+      },
     })
 
     return accommodation ? this.mapToDto(accommodation) : null
-  }
-
-  async hasName(name: string): Promise<boolean> {
-    const accommodationExists = await prisma.accommodation.findFirst({
-      where: { name },
-    })
-    return Boolean(accommodationExists)
   }
 
   async add(accommodationDto: AccommodationDto): Promise<void> {
@@ -51,34 +46,13 @@ export class AccommodationsRepository {
         coupleBeds: accommodation.coupleBeds,
         suites: accommodation.suites,
         garages: accommodation.garages,
+        maxHostingsCount: accommodation.maxHostingsCount,
         hasAirConditioning: accommodation.hasAirConditioning,
       },
     })
   }
 
-  async update(accommodationDto: AccommodationDto): Promise<void> {
-    const accommodation = Accommodation.create(accommodationDto)
-
-    await prisma.accommodation.update({
-      where: { id: accommodation.id },
-      data: {
-        name: accommodation.name,
-        singleBeds: accommodation.singleBeds,
-        coupleBeds: accommodation.coupleBeds,
-        suites: accommodation.suites,
-        garages: accommodation.garages,
-        hasAirConditioning: accommodation.hasAirConditioning,
-      },
-    })
-  }
-
-  async remove(id: string): Promise<void> {
-    await prisma.accommodation.delete({
-      where: { id },
-    })
-  }
-
-  private async seed(): Promise<void> {
+  async seed(): Promise<void> {
     const count = await prisma.accommodation.count()
 
     if (count === 0) {
@@ -91,9 +65,9 @@ export class AccommodationsRepository {
         new SimpleFamilyDirector().build().dto,
       ]
 
-      for (const accommodationDto of seedAccommodations) {
-        await this.add(accommodationDto)
-      }
+      await Promise.all(
+        seedAccommodations.map((accommodation) => this.add(accommodation)),
+      )
     }
   }
 
@@ -105,6 +79,8 @@ export class AccommodationsRepository {
       coupleBeds: accommodation.coupleBeds,
       suites: accommodation.suites,
       garages: accommodation.garages,
+      maxHostingsCount: accommodation.maxHostingsCount,
+      hostingsCount: accommodation.hostings.length,
       hasAirConditioning: accommodation.hasAirConditioning,
     }
   }

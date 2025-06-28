@@ -8,4 +8,6 @@ export type HostingDto = {
   hostName: string
   hostDocuments: DocumentDto[]
   hostDependentsCount: number
+  startDate: string
+  endDate: string
 }

@@ -2,4 +2,24 @@ export class DateFormatter {
   static format(date: string): string {
     return new Date(date).toLocaleDateString('pt-BR')
   }
+
+  static formatDate(date: Date) {
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}/${month}/${year}`
+  }
+
+  static formatDateString(dataString: string) {
+    const data = new Date(dataString)
+    const dia = String(data.getUTCDate()).padStart(2, '0')
+    const mes = String(data.getUTCMonth() + 1).padStart(2, '0')
+    const ano = data.getUTCFullYear()
+    return `${dia}/${mes}/${ano}`
+  }
+
+  static formatDateIsoString(date: string) {
+    const [day, month, year] = date.split('/')
+    return `${year}-${month}-${day}`
+  }
 }

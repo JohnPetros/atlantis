@@ -6,9 +6,6 @@ import { useActionContext } from '@/ui/hooks/use-action-context'
 type Props = {
   isLoading?: boolean
   accommodations: AccommodationDto[]
-  onDeleteAccommodation: (accommodationId: string) => Promise<void>
-  onCreateAccommodation: (accommodation: AccommodationDto) => Promise<void>
-  onUpdateAccommodation: (accommodation: AccommodationDto) => Promise<void>
 }
 
 export const AccommodationsTable = (props: Props) => {

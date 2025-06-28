@@ -3,6 +3,7 @@ import { Hono } from 'hono'
 import type { HostingDto } from '@atlantis/core/dtos'
 
 import { HostingsRepository } from '../database/repositories/hostings-repository.js'
+import { accommodationsRepository } from 'src/database/repositories/index.js'
 
 const hostingsRouter = new Hono()
 const hostingsRepository = new HostingsRepository()
@@ -38,7 +39,18 @@ hostingsRouter.post('/', async (c) => {
 
     const hasHosting = await hostingsRepository.findByHostId(hostingData.hostId)
     if (hasHosting) {
-      return c.json({ message: 'Acomodação já hospedada' }, 409)
+      return c.json({ message: 'Hóspede já hospedado' }, 409)
+    }
+
+    const accommodation = await accommodationsRepository.findById(
+      hostingData.accomodationId,
+    )
+    if (!accommodation) {
+      return c.json({ message: 'Acomodação não encontrada' }, 404)
+    }
+
+    if (accommodation.hostingsCount > accommodation.maxHostingsCount + 1) {
+      return c.json({ message: 'Acomodação já atingiu o limite de hospedagens' }, 409)
     }
 
     await hostingsRepository.add(hostingData)
@@ -54,11 +66,29 @@ hostingsRouter.put('/:id', async (c) => {
     const id = c.req.param('id')
     const hostingData: HostingDto = await c.req.json()
 
-    const hasHosting = await hostingsRepository.findByAccommodationId(
-      hostingData.accomodationId,
-    )
-    if (hasHosting) {
-      return c.json({ message: 'Cliente já hospedado' }, 409)
+    const hosting = await hostingsRepository.findById(id)
+    if (!hosting) {
+      return c.json({ message: 'Hospedagem não encontrada' }, 404)
+    }
+
+    if (hosting.hostId !== hostingData.hostId) {
+      const hasHosting = await hostingsRepository.findByHostId(hostingData.hostId)
+      if (hasHosting) {
+        return c.json({ message: 'Hóspede já hospedado' }, 409)
+      }
+    }
+
+    if (hosting.accomodationId !== hostingData.accomodationId) {
+      const accommodation = await accommodationsRepository.findById(
+        hostingData.accomodationId,
+      )
+      if (!accommodation) {
+        return c.json({ message: 'Acomodação não encontrada' }, 404)
+      }
+
+      if (accommodation.hostingsCount > accommodation.maxHostingsCount + 1) {
+        return c.json({ message: 'Acomodação já atingiu o limite de hospedagens' }, 409)
+      }
     }
 
     hostingData.id = id

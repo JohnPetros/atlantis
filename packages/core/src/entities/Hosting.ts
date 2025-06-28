@@ -1,6 +1,7 @@
 import { Entity } from './Entity'
 import { Document } from './Document'
 import type { HostingDto } from '../dtos'
+import { DateFormatter } from '../formatters'
 
 type HostingProps = {
   accomodationId: string
@@ -9,6 +10,8 @@ type HostingProps = {
   hostName: string
   hostDocuments: Document[]
   hostDependentsCount: number
+  startDate: Date
+  endDate: Date
 }
 
 export class Hosting extends Entity<HostingProps> {
@@ -21,6 +24,8 @@ export class Hosting extends Entity<HostingProps> {
         hostName: dto.hostName,
         hostDocuments: dto.hostDocuments.map(Document.create),
         hostDependentsCount: dto.hostDependentsCount,
+        startDate: new Date(dto.startDate),
+        endDate: new Date(dto.endDate),
       },
       dto.id,
     )
@@ -50,6 +55,14 @@ export class Hosting extends Entity<HostingProps> {
     return this.props.hostDependentsCount
   }
 
+  get startDate(): Date {
+    return this.props.startDate
+  }
+
+  get endDate(): Date {
+    return this.props.endDate
+  }
+
   get dto(): HostingDto {
     return {
       id: this.id,
@@ -59,6 +72,8 @@ export class Hosting extends Entity<HostingProps> {
       hostName: this.hostName,
       hostDocuments: this.hostDocuments.map((document) => document.dto),
       hostDependentsCount: this.hostDependentsCount,
+      startDate: DateFormatter.formatDate(this.startDate),
+      endDate: DateFormatter.formatDate(this.endDate),
     }
   }
 }

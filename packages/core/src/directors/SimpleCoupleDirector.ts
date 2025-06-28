@@ -17,6 +17,7 @@ export class SimpleCupleDirector extends Director<Accommodation> {
       .setGarages(1)
       .setSuites(1)
       .setHasAirConditioning(true)
+      .setMaxHostingsCount(32)
       .build()
   }
 }

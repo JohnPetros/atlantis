@@ -17,6 +17,7 @@ export class SuperFamilyDirector extends Director<Accommodation> {
       .setGarages(2)
       .setSuites(3)
       .setHasAirConditioning(true)
+      .setMaxHostingsCount(10)
       .build()
   }
 }

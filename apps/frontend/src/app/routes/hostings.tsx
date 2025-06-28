@@ -21,6 +21,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
     const response = await hostingsService.createHosting(
       action.payload.accomodationId,
       action.payload.hostId,
+      action.payload.startDate,
+      action.payload.endDate,
     )
     if (!response.ok) {
       return { error: await response.json() }
@@ -32,6 +34,8 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
       action.payload.hostingId,
       action.payload.accomodationId,
       action.payload.hostId,
+      action.payload.startDate,
+      action.payload.endDate,
     )
     if (!response.ok) {
       return { error: await response.json() }
