@@ -34,11 +34,18 @@ Este é um app para o gerenciamento de acomodações e hospedagens para um resor
 
 - [Git](https://git-scm.com/)
 - [NodeJs](https://www.python.org/) pelo menos igual ou acima da versão 23.
+- [Npm](https://www.npmjs.com/) pelo menos igual ou acima da versão 10.9.2.
 
 ### Clone o repositório
 
 ```bash
 git clone https://github.com/JohnPetros/atlantis.git
+```
+
+### Acesse a pasta do projeto
+
+```bash
+cd ./atlantis
 ```
 
 ### Instale as dependências na raiz do projeto
