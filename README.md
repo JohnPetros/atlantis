@@ -28,7 +28,7 @@ Este é um app para o gerenciamento de acomodações e hospedagens para um resor
 
 ---
 
-## Guia de instalação do App 4
+## Guia de instalação do App 5
 
 ### Pré-requisitos
 
@@ -49,7 +49,7 @@ npm install
 ### Acesse a pasta da aplicação Backend
 
 ```bash
-cd /apps/backend
+cd ./apps/backend
 ```
 
 ### Gere os types do banco de dados
@@ -64,10 +64,12 @@ npx prisma generate
 npm run dev
 ```
 
+> A aplicação backend estará rodando no endereço http://localhost:3000
+
 ### Acesse a pasta da aplicação SPA
 
 ```bash
-cd /apps/frontend
+cd ./apps/frontend
 ```
 
 ### Execute a aplicação SPA
@@ -75,5 +77,7 @@ cd /apps/frontend
 ```bash
 npm run dev
 ```
+
+> A aplicação frontend estará rodando no endereço http://localhost:5173
 
 ---

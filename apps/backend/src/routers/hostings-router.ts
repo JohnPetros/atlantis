@@ -49,7 +49,7 @@ hostingsRouter.post('/', async (c) => {
       return c.json({ message: 'Acomodação não encontrada' }, 404)
     }
 
-    if (accommodation.hostingsCount > accommodation.maxHostingsCount + 1) {
+    if (accommodation.hostingsCount + 1 > accommodation.maxHostingsCount) {
       return c.json({ message: 'Acomodação já atingiu o limite de hospedagens' }, 409)
     }
 
@@ -86,7 +86,7 @@ hostingsRouter.put('/:id', async (c) => {
         return c.json({ message: 'Acomodação não encontrada' }, 404)
       }
 
-      if (accommodation.hostingsCount > accommodation.maxHostingsCount + 1) {
+      if (accommodation.hostingsCount + 1 > accommodation.maxHostingsCount) {
         return c.json({ message: 'Acomodação já atingiu o limite de hospedagens' }, 409)
       }
     }
