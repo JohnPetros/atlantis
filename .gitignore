@@ -1,12 +1,14 @@
 .DS_Store
-node_modules
+
+./node_modules
 
 # React Router
-/.react-router/
+.react-router/
 /build/
 
 # Turbo
 .turbo
+.vite
 
 # dev
 .yarn/
