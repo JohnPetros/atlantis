@@ -60,4 +60,6 @@ npm install
 npm run dev
 ```
 
+> A aplicação SPA estará rodando no endereço http://localhost:5173
+
 ---
